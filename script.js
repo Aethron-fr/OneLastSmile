@@ -2081,7 +2081,14 @@ window.submitReply = function() {
   .then(() => {
     // Cinematic Fold Away
     wrapper.classList.add('submitted');
+    const intro = document.querySelector('.reply-intro');
+    if (intro) {
+      intro.style.transition = 'opacity 0.8s ease';
+      intro.style.opacity = '0';
+    }
     setTimeout(() => {
+      wrapper.style.display = 'none';
+      if (intro) intro.style.display = 'none';
       success.style.display = 'flex';
       success.offsetHeight; // Trigger layout
       success.classList.add('active');
