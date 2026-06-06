@@ -69,9 +69,8 @@
   }
 })();
 
-// ====== BACK BUTTON PROTECTION ======
-history.pushState(null, null, location.href);
-window.onpopstate = () => history.go(1);
+// Prevent right-click and selection to keep the experience intact
+// document.addEventListener('contextmenu', e => e.preventDefault());
 
 // ====== FLICKER-FREE FIRST PAINT RESOLUTION ======
 document.addEventListener('DOMContentLoaded', () => {
@@ -274,15 +273,42 @@ function initAtmosphereSystem() {
           atmClasses.forEach(function(c) { document.body.classList.remove(c); });
           document.body.classList.add(cls);
         }
+
+        // Navbar Active Highlight
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+
+        // Dynamic Tab Title
+        const id = entry.target.id;
+        if (id === 'home') document.title = "Anushka 💕 — My Forever";
+        else if (id === 'letter') document.title = "💌 A Letter For You...";
+        else if (id === 'propose') document.title = "💍 One Question...";
+        else if (id === 'final-choice') document.title = "🌸 One Last Smile";
+        else document.title = "Anushka 💕 — My Forever";
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.5 });
 
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
     if (el) obs.observe(el);
   });
 }
+
+// Tab Visibility Title Change
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    document.title = "💕 Come back, Anushka...";
+  } else {
+    document.title = "Anushka 💕 — My Forever";
+  }
+});
 
 // ====== ENHANCED MUSIC CONTROLS ======
 var _isMuted = false;
@@ -442,6 +468,13 @@ window.addEventListener('scroll', () => {
   if (!isScrolling) {
     window.requestAnimationFrame(() => {
       if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+      
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+      if (scrollTopBtn) {
+        if (window.scrollY > 500) scrollTopBtn.classList.add('visible');
+        else scrollTopBtn.classList.remove('visible');
+      }
+
       isScrolling = false;
     });
     isScrolling = true;
@@ -637,7 +670,7 @@ function startTypewriter() {
     } else {
       clearInterval(letterInterval);
     }
-  }, 30);
+  }, 42);
 }
 
 function replayLetter() {
@@ -694,6 +727,73 @@ function resetAutoplay() {
 // Start autoplay
 quoteAutoplay = setInterval(() => nextQuote(), 5000);
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Swipe gesture for quotes
+  const carousel = document.querySelector('.quotes-carousel');
+  if (carousel) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const distance = touchEndX - touchStartX;
+      if (distance < -50) nextQuote(); // Swipe left
+      if (distance > 50) prevQuote();  // Swipe right
+    }
+  }
+
+  // Keyboard navigation for quotes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') prevQuote();
+    if (e.key === 'ArrowRight') nextQuote();
+  });
+});
+
+// Easter Eggs
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+let typedString = "";
+
+document.addEventListener('keydown', (e) => {
+  // Konami Code
+  if (e.key === konamiCode[konamiIndex] || (e.key.toLowerCase() === konamiCode[konamiIndex].toLowerCase())) {
+    konamiIndex++;
+    if (konamiIndex === konamiCode.length) {
+      if (typeof showFloatingSecret === 'function') {
+        showFloatingSecret("You found the secret... Just like I found you. 💕", document.body);
+      }
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          if (typeof Particle !== 'undefined') particles.push(new Particle());
+        }, i * 50);
+      }
+      konamiIndex = 0;
+    }
+  } else {
+    konamiIndex = 0;
+  }
+
+  // "anushka" typing
+  if (e.key.length === 1) {
+    typedString += e.key.toLowerCase();
+    if (typedString.length > 7) typedString = typedString.slice(-7);
+    if (typedString === "anushka") {
+      if (typeof showFloatingSecret === 'function') {
+        showFloatingSecret("That name... it means everything to me. 🌸", document.body);
+      }
+      typedString = "";
+    }
+  }
+});
+
 // ====== MUSIC PLAYER ======
 let isPlaying = false;
 const bgAudio = document.getElementById('bgAudio');
@@ -701,6 +801,52 @@ const playIcon = document.getElementById('playIcon');
 const vinyl = document.getElementById('vinyl');
 const equalizer = document.getElementById('equalizer');
 const lyricsBox = document.querySelector('.lyrics-box');
+
+// Song Progress Logic
+const songCurrentTime = document.getElementById('songCurrentTime');
+const songDuration = document.getElementById('songDuration');
+const songProgressFill = document.getElementById('songProgressFill');
+const songProgressTrack = document.getElementById('songProgressTrack');
+
+function formatTime(seconds) {
+  if (isNaN(seconds)) return '0:00';
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+if (bgAudio) {
+  bgAudio.addEventListener('loadedmetadata', () => {
+    if (songDuration) songDuration.textContent = formatTime(bgAudio.duration);
+  });
+
+  bgAudio.addEventListener('timeupdate', () => {
+    if (!bgAudio.duration) return;
+    const current = bgAudio.currentTime;
+    const duration = bgAudio.duration;
+    if (songCurrentTime) songCurrentTime.textContent = formatTime(current);
+    if (songDuration) songDuration.textContent = formatTime(duration);
+    if (songProgressFill) {
+      const percentage = current / duration;
+      songProgressFill.style.width = `${percentage * 100}%`;
+      // Lyrics scroll auto-sync
+      if (lyricsBox && !isUserScrolling) {
+        lyricsBox.scrollTop = percentage * (lyricsBox.scrollHeight - lyricsBox.clientHeight);
+      }
+    }
+  });
+}
+
+if (songProgressTrack) {
+  songProgressTrack.addEventListener('click', (e) => {
+    if (!bgAudio || !bgAudio.duration) return;
+    const rect = songProgressTrack.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const width = rect.width;
+    const percentage = clickX / width;
+    bgAudio.currentTime = percentage * bgAudio.duration;
+  });
+}
 
 let lyricsAnimationId;
 let exactScrollTop = 0;
@@ -1278,6 +1424,10 @@ function showBeforeYouGo() {
   el.style.display = 'flex';
   el.offsetHeight; // force reflow
   el.classList.add('byg-active');
+
+  // Show the download button once ending is reached
+  const saveSection = document.getElementById('saveMemorySection');
+  if (saveSection) saveSection.style.display = 'block';
 
   // Track ending reached in analytics
   try { localStorage.setItem('ols_ending_reached', 'true'); } catch(e) {}
@@ -1900,14 +2050,14 @@ window.submitReply = function() {
   const success = document.getElementById('replySuccess');
 
   if (!text) {
-    btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please write something...';
+    btn.innerHTML = '<span><i class="fas fa-exclamation-circle"></i> Please write something...</span>';
     setTimeout(() => {
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Leave A Memory Behind';
+      btn.innerHTML = '<span><i class="fas fa-paper-plane"></i> Leave A Memory Behind</span>';
     }, 2500);
     return;
   }
 
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending silently...';
+  btn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> Sending silently...</span>';
   btn.style.pointerEvents = 'none';
 
   // Real private delivery via secure Vercel API endpoint
@@ -1936,7 +2086,7 @@ window.submitReply = function() {
   })
   .catch(err => {
     console.error("Submission failed:", err);
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Try again...';
+    btn.innerHTML = '<span><i class="fas fa-paper-plane"></i> Try again...</span>';
     btn.style.pointerEvents = 'auto';
   });
 };
@@ -2014,6 +2164,22 @@ function initQuietSecrets() {
         showFloatingSecret("If you found this, thank you for staying.", footerSign);
       }
     });
+  }
+
+  // Footer 3-second stay Easter Egg
+  const footerEl = document.querySelector('footer.footer');
+  if (footerEl) {
+    let footerTimer;
+    const footerObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        footerTimer = setTimeout(() => {
+          showFloatingSecret("You made it to the end. Thank you for being here.", footerEl);
+        }, 3000);
+      } else {
+        clearTimeout(footerTimer);
+      }
+    }, { threshold: 0.5 });
+    footerObs.observe(footerEl);
   }
 
   // 6. Random Rare Message (0.3% chance on scroll stop)

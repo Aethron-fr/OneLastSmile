@@ -13,14 +13,14 @@
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="Anushka 💕 — My Forever"/>
   <meta property="og:description" content="A love letter to Anushka — from Swapnadip Ghosh, with all his heart."/>
-  <meta property="og:image" content="anushka_portrait.png"/>
+  <meta property="og:image" content="https://onelastsmile.vercel.app/anushka_portrait.png"/>
   <meta property="og:image:width" content="800"/>
   <meta property="og:image:height" content="800"/>
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Anushka 💕 — My Forever"/>
   <meta name="twitter:description" content="A love letter to Anushka — from Swapnadip Ghosh, with all his heart."/>
-  <meta name="twitter:image" content="anushka_portrait.png"/>
+  <meta name="twitter:image" content="https://onelastsmile.vercel.app/anushka_portrait.png"/>
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -235,7 +235,7 @@
        BIRTHDAY GIFT FLOW — CINEMATIC OVERLAY
        Sits on top of everything. Fades out on "Enter".
        ==================================================== -->
-  <div id="birthdayFlow">
+  <div id="birthdayFlow" style="display: flex; position: fixed; inset: 0; z-index: 100000;">
 
     <!-- Particle background for birthday screens -->
     <canvas id="bdCanvas"></canvas>
@@ -506,7 +506,7 @@
         <div class="about-image-ring"></div>
         <div class="about-image-ring ring2"></div>
         <div class="about-avatar">
-          <img src="anushka_portrait.png" alt="Anushka" class="about-portrait" loading="lazy"/>
+          <img src="anushka_portrait.png" alt="Anushka" class="about-portrait" fetchpriority="high"/>
         </div>
         <div class="about-badge"><i class="fas fa-heart"></i> Very Special</div>
       </div>
@@ -898,6 +898,13 @@
             <i class="fas fa-redo-alt"></i>
           </button>
         </div>
+        <div class="song-progress-wrap">
+          <span class="song-time" id="songCurrentTime">0:00</span>
+          <div class="song-progress-track" id="songProgressTrack">
+            <div class="song-progress-fill" id="songProgressFill"></div>
+          </div>
+          <span class="song-time" id="songDuration">0:00</span>
+        </div>
       </div>
     </div>
     <!-- Audio element -->
@@ -1000,7 +1007,7 @@
       <div class="reply-form-wrapper" id="replyFormWrapper">
         <textarea id="replyText" class="reply-textarea" placeholder="Maybe there's something you never said..." spellcheck="false"></textarea>
         <button class="btn-reply bd-btn" id="btnReplySubmit" onclick="submitReply()">
-          <i class="fas fa-paper-plane"></i> Leave A Memory Behind
+          <span><i class="fas fa-paper-plane"></i> Leave A Memory Behind</span>
         </button>
       </div>
 
@@ -1081,7 +1088,7 @@
     </div>
   </section>
 
-<!-- save-memory removed -->
+
 
   <!-- ====== FOOTER ====== -->
   <footer class="footer">
@@ -1136,6 +1143,13 @@
       <p class="byg-line byg-line-5">You were never just another chapter.</p>
       <p class="byg-line byg-line-6">And maybe&hellip;<br>that&rsquo;s enough.</p>
       <p class="byg-signature">OneLastSmile</p>
+
+      <!-- Memory Keepsake Download -->
+      <div id="saveMemorySection" style="text-align:center; margin: 3rem 0 1rem; display:none; position:relative; z-index:9999999;">
+        <button class="btn-keep" id="saveMemoryBtn" onclick="saveMemoryKeepsake()">
+          <i class="fas fa-download"></i> Download This Memory
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1474,6 +1488,9 @@
     // ── bdEnter: “One Last Smile” → show Gift Intro + start music ──
     var _giShowing = false;  // double-trigger guard
     window.bdEnter = function () {
+      history.pushState(null, null, location.href);
+      window.onpopstate = () => history.go(1);
+
       if (_giShowing) return;          // prevent double-tap on mobile
       _giShowing = true;
       var gi = document.getElementById('giftIntro');
@@ -1876,5 +1893,8 @@
   })();
   </script>
 
+  <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
 </body>
 </html>
