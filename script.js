@@ -2060,14 +2060,17 @@ window.submitReply = function() {
   btn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> Sending silently...</span>';
   btn.style.pointerEvents = 'none';
 
-  // Real private delivery via secure Vercel API endpoint
-  fetch("/api/submit-reply", {
+  // Real private delivery via secure FormSubmit AJAX endpoint
+  fetch("https://formsubmit.co/ajax/justgothacked108@gmail.com", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     },
     body: JSON.stringify({
       message: text,
+      _subject: "OneLastSmile - A New Memory Fragment",
+      _captcha: "false",
       timestamp: new Date().toLocaleString()
     })
   })
