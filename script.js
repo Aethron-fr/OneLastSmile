@@ -2197,37 +2197,46 @@ if (document.readyState === 'loading') {
   initQuietSecrets();
 }
 
-// ====== OFFLINE SCREEN ======
-function updateOfflineStatus() {
-  const offlineScreen = document.getElementById('offlineScreen');
+// ====== SERVER CONNECTION & OFFLINE CHECK ======
+async function performHealthCheck() {
   if (!navigator.onLine) {
-    if (offlineScreen) {
-      offlineScreen.classList.add('active');
-      const audio = document.getElementById('bgAudio');
-      if (audio && !audio.paused) {
-        audio.pause(); // Pause music gracefully when connection drops
-        window._olsAudioWasPlaying = true;
-      }
-    }
-  } else {
-    if (offlineScreen) {
-      offlineScreen.classList.remove('active');
-      if (window._olsAudioWasPlaying) {
-        const audio = document.getElementById('bgAudio');
-        if (audio) audio.play().catch(e => {});
-        window._olsAudioWasPlaying = false;
-      }
-    }
+    triggerErrorScreen();
+    return;
+  }
+  try {
+    const res = await fetch('/?healthcheck=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
+    if (!res.ok) triggerErrorScreen();
+  } catch (e) {
+    triggerErrorScreen();
   }
 }
 
-window.addEventListener('offline', updateOfflineStatus);
-window.addEventListener('online', updateOfflineStatus);
-// Run immediately to catch if the Service Worker served the page while offline
+function triggerErrorScreen() {
+  const reloadScreen = document.getElementById('reloadScreen');
+  if (reloadScreen) reloadScreen.classList.add('active');
+  const audio = document.getElementById('bgAudio');
+  if (audio && !audio.paused) {
+    audio.pause(); // Pause music gracefully when connection drops
+    window._olsAudioWasPlaying = true;
+  }
+}
+
+window.addEventListener('offline', triggerErrorScreen);
+window.addEventListener('online', () => {
+  const reloadScreen = document.getElementById('reloadScreen');
+  if (reloadScreen) reloadScreen.classList.remove('active');
+  if (window._olsAudioWasPlaying) {
+    const audio = document.getElementById('bgAudio');
+    if (audio) audio.play().catch(e => {});
+    window._olsAudioWasPlaying = false;
+  }
+});
+
+// Run health check immediately to catch if the Service Worker served the page while the server is down
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', updateOfflineStatus);
+  document.addEventListener('DOMContentLoaded', performHealthCheck);
 } else {
-  updateOfflineStatus();
+  performHealthCheck();
 }
 
 // ====== RELOAD OVERLAY ======
