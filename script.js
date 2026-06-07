@@ -2197,4 +2197,27 @@ if (document.readyState === 'loading') {
   initQuietSecrets();
 }
 
+// ====== OFFLINE SCREEN ======
+window.addEventListener('offline', () => {
+  const offlineScreen = document.getElementById('offlineScreen');
+  if (offlineScreen) {
+    offlineScreen.classList.add('active');
+    const audio = document.getElementById('bgAudio');
+    if (audio && !audio.paused) {
+      audio.pause(); // Pause music gracefully when connection drops
+      window._olsAudioWasPlaying = true;
+    }
+  }
+});
 
+window.addEventListener('online', () => {
+  const offlineScreen = document.getElementById('offlineScreen');
+  if (offlineScreen) {
+    offlineScreen.classList.remove('active');
+    if (window._olsAudioWasPlaying) {
+      const audio = document.getElementById('bgAudio');
+      if (audio) audio.play().catch(e => {});
+      window._olsAudioWasPlaying = false;
+    }
+  }
+});

@@ -1910,5 +1910,20 @@
       root.render(React.createElement('div', { 'data-easter-egg': 'For the glow ✨' }));
     } catch(e) {}
   </script>
+  <!-- Offline / Signal Lost Screen -->
+  <div id="offlineScreen" class="offline-screen">
+    <div class="offline-glow"></div>
+    <div class="offline-content">
+      <i class="fas fa-heart offline-icon"></i>
+      <h2 class="offline-heading">Connection Lost...</h2>
+      <p class="offline-text">
+        The digital signal may have faded, but the real connection is still here.<br><br>
+        <span class="offline-subtext">Waiting for your internet to return...</span>
+      </p>
+      <button class="btn-primary offline-btn" onclick="window.location.reload()">
+        <i class="fas fa-redo-alt"></i> Try Again
+      </button>
+    </div>
+  </div>
 </body>
 </html>
