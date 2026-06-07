@@ -1925,5 +1925,28 @@
       </button>
     </div>
   </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
+
+  <!-- Reload Overlay Screen -->
+  <div id="reloadScreen" class="reload-screen">
+    <div class="reload-content">
+      <i class="fas fa-heart reload-icon"></i>
+      <h2 class="reload-title">Wait...</h2>
+      <p class="reload-subtitle">Some things are too precious to lose. Come back?</p>
+      <div class="reload-buttons">
+        <button class="btn-primary" onclick="document.getElementById('reloadScreen').classList.remove('active')">Stay</button>
+        <button class="btn-secondary" onclick="window._allowReload = true; window.location.reload()">Leave</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

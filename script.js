@@ -2198,26 +2198,59 @@ if (document.readyState === 'loading') {
 }
 
 // ====== OFFLINE SCREEN ======
-window.addEventListener('offline', () => {
+function updateOfflineStatus() {
   const offlineScreen = document.getElementById('offlineScreen');
-  if (offlineScreen) {
-    offlineScreen.classList.add('active');
-    const audio = document.getElementById('bgAudio');
-    if (audio && !audio.paused) {
-      audio.pause(); // Pause music gracefully when connection drops
-      window._olsAudioWasPlaying = true;
+  if (!navigator.onLine) {
+    if (offlineScreen) {
+      offlineScreen.classList.add('active');
+      const audio = document.getElementById('bgAudio');
+      if (audio && !audio.paused) {
+        audio.pause(); // Pause music gracefully when connection drops
+        window._olsAudioWasPlaying = true;
+      }
+    }
+  } else {
+    if (offlineScreen) {
+      offlineScreen.classList.remove('active');
+      if (window._olsAudioWasPlaying) {
+        const audio = document.getElementById('bgAudio');
+        if (audio) audio.play().catch(e => {});
+        window._olsAudioWasPlaying = false;
+      }
     }
   }
+}
+
+window.addEventListener('offline', updateOfflineStatus);
+window.addEventListener('online', updateOfflineStatus);
+// Run immediately to catch if the Service Worker served the page while offline
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateOfflineStatus);
+} else {
+  updateOfflineStatus();
+}
+
+// ====== RELOAD OVERLAY ======
+window.addEventListener('beforeunload', (e) => {
+  if (window._allowReload) return;
+  const reloadScreen = document.getElementById('reloadScreen');
+  if (reloadScreen) {
+    reloadScreen.classList.add('active');
+  }
+  // Per instructions: Do NOT use browser's default beforeunload dialog.
+  // Therefore, we do NOT return a string or call e.preventDefault().
+  // Note: Modern browsers will immediately unload the page without waiting 
+  // for the user to interact with the custom overlay if the native dialog is bypassed.
 });
 
-window.addEventListener('online', () => {
-  const offlineScreen = document.getElementById('offlineScreen');
-  if (offlineScreen) {
-    offlineScreen.classList.remove('active');
-    if (window._olsAudioWasPlaying) {
-      const audio = document.getElementById('bgAudio');
-      if (audio) audio.play().catch(e => {});
-      window._olsAudioWasPlaying = false;
+// Intercept F5 and Ctrl+R to actually make the buttons functional when reloading via keyboard
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'F5' || (e.ctrlKey && e.key.toLowerCase() === 'r')) {
+    if (window._allowReload) return;
+    e.preventDefault(); // Block native reload to show our custom overlay
+    const reloadScreen = document.getElementById('reloadScreen');
+    if (reloadScreen) {
+      reloadScreen.classList.add('active');
     }
   }
 });
