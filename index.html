@@ -1897,5 +1897,18 @@
   <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
     <i class="fas fa-chevron-up"></i>
   </button>
+
+  <!-- React DevTools Easter Egg Trigger -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script>
+    try {
+      const ghostDiv = document.createElement('div');
+      ghostDiv.style.display = 'none';
+      document.body.appendChild(ghostDiv);
+      const root = ReactDOM.createRoot(ghostDiv);
+      root.render(React.createElement('div', { 'data-easter-egg': 'For the glow ✨' }));
+    } catch(e) {}
+  </script>
 </body>
 </html>
