@@ -2263,3 +2263,23 @@ window.addEventListener('keydown', (e) => {
     }
   }
 });
+
+// ====== MOBILE WARNING MODAL ======
+document.addEventListener('DOMContentLoaded', () => {
+  const isMobile = window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent);
+  const mobileWarningModal = document.getElementById('mobileWarningModal');
+  
+  if (isMobile && mobileWarningModal && !sessionStorage.getItem('mobileWarningDismissed')) {
+    setTimeout(() => {
+      mobileWarningModal.classList.add('active');
+    }, 800);
+  }
+});
+
+function dismissMobileWarning() {
+  const mobileWarningModal = document.getElementById('mobileWarningModal');
+  if (mobileWarningModal) {
+    mobileWarningModal.classList.remove('active');
+    sessionStorage.setItem('mobileWarningDismissed', 'true');
+  }
+}

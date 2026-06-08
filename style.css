@@ -4595,3 +4595,60 @@ body.atmosphere-deep {
   color: var(--secondary-color);
   border: 1px solid var(--secondary-color);
 }
+
+/* ====================================================
+   MOBILE WARNING MODAL
+   ==================================================== */
+.mobile-warning-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 5, 15, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.mobile-warning-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.mwm-content {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px 25px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mobile-warning-modal.active .mwm-content {
+  transform: translateY(0) scale(1);
+}
+.mwm-icon {
+  font-size: 3.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(255, 77, 133, 0.5);
+}
+.mwm-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 15px;
+}
+.mwm-text {
+  font-size: 1.05rem;
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+.mwm-btn {
+  width: 100%;
+}
