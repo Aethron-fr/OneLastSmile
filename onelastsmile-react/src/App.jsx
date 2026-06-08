@@ -4,7 +4,6 @@ import './perf.css'
 import DualCursor from './components/DualCursor'
 import BirthdayFlow from './components/BirthdayFlow'
 import MainSite from './components/MainSite'
-import MobileWarningModal from './components/MobileWarningModal'
 
 export default function App() {
   const [phase, setPhase] = useState('birthday') // 'birthday' | 'main'
@@ -17,7 +16,6 @@ export default function App() {
 
   return (
     <>
-      <MobileWarningModal />
       <DualCursor />
       {phase === 'birthday' ? (
         <BirthdayFlow onEnter={() => setPhase('main')} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
