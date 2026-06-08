@@ -2088,11 +2088,11 @@ html, body, * {
   justify-content: center;
 }
 
-@media (min-width: 769px) {
+/* @media (min-width: 769px) {
   #mobileWarning {
     display: none !important;
   }
-}
+} */
 
 #mobileWarningCard {
   background: var(--glass-bg);
