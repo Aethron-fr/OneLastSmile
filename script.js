@@ -2265,16 +2265,22 @@ window.addEventListener('keydown', (e) => {
 });
 
 // ====== MOBILE WARNING MODAL ======
-document.addEventListener('DOMContentLoaded', () => {
+function initMobileWarning() {
   const isMobile = window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent);
   const mobileWarningModal = document.getElementById('mobileWarningModal');
   
   if (isMobile && mobileWarningModal && !sessionStorage.getItem('mobileWarningDismissed')) {
     setTimeout(() => {
       mobileWarningModal.classList.add('active');
-    }, 800);
+    }, 100);
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobileWarning);
+} else {
+  initMobileWarning();
+}
 
 function dismissMobileWarning() {
   const mobileWarningModal = document.getElementById('mobileWarningModal');
