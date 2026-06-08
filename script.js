@@ -2276,6 +2276,8 @@ function closeMobileWarning() {
 
 // Auto-show only on mobile
 window.addEventListener('DOMContentLoaded', () => {
-  const el = document.getElementById('mobileWarning');
-  if (el) el.style.display = 'flex';
+  if (window.innerWidth <= 768) {
+    const el = document.getElementById('mobileWarning');
+    if (el) el.style.display = 'flex';
+  }
 });
