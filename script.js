@@ -2266,10 +2266,9 @@ window.addEventListener('keydown', (e) => {
 
 // ====== MOBILE WARNING MODAL ======
 function initMobileWarning() {
-  const isMobile = window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent);
   const mobileWarningModal = document.getElementById('mobileWarningModal');
   
-  if (isMobile && mobileWarningModal && !sessionStorage.getItem('mobileWarningDismissed')) {
+  if (mobileWarningModal && !sessionStorage.getItem('mobileWarningDismissed')) {
     setTimeout(() => {
       mobileWarningModal.classList.add('active');
     }, 100);
