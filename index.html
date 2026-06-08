@@ -232,6 +232,29 @@
 
 
   <!-- ====================================================
+       MOBILE WARNING (User specified)
+       ==================================================== -->
+<div id="mobileWarning">
+  <div id="mobileWarningCard">
+    <div id="mobileWarningHeart">💕</div>
+    <h2 id="mobileWarningTitle">Made for a Bigger Screen</h2>
+    <p id="mobileWarningText">
+      This was built with love, late nights, and a lot of 
+      detail — best experienced on a laptop or desktop.<br><br>
+      On mobile, some magic might be lost.
+    </p>
+    <div id="mobileWarningButtons">
+      <button onclick="closeMobileWarning()" id="btnContinueMobile">
+        Continue Anyway 🌸
+      </button>
+      <p id="mobileWarningHint">
+        (For the full experience, open on desktop)
+      </p>
+    </div>
+  </div>
+</div>
+
+  <!-- ====================================================
        BIRTHDAY GIFT FLOW — CINEMATIC OVERLAY
        Sits on top of everything. Fades out on "Enter".
        ==================================================== -->
@@ -1946,21 +1969,6 @@
         <button class="btn-primary" onclick="document.getElementById('reloadScreen').classList.remove('active')">Stay</button>
         <button class="btn-secondary" onclick="window._allowReload = true; window.location.reload()">Leave</button>
       </div>
-    </div>
-  </div>
-  <!-- ====================================================
-       MOBILE WARNING MODAL
-       ==================================================== -->
-  <div id="mobileWarningModal" class="mobile-warning-modal">
-    <div class="mwm-content">
-      <i class="fas fa-desktop mwm-icon"></i>
-      <h2 class="mwm-title">For the Best Experience</h2>
-      <p class="mwm-text">
-        This experience was crafted with intricate details and cinematic effects that are <strong>best viewed on a desktop or laptop</strong>.
-        <br><br>
-        You can still continue on mobile, but you might miss out on the full magic.
-      </p>
-      <button class="btn-primary mwm-btn" onclick="dismissMobileWarning()">Continue Anyway</button>
     </div>
   </div>
 </body>

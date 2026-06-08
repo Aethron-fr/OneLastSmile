@@ -2265,26 +2265,19 @@ window.addEventListener('keydown', (e) => {
 });
 
 // ====== MOBILE WARNING MODAL ======
-function initMobileWarning() {
-  const mobileWarningModal = document.getElementById('mobileWarningModal');
-  
-  if (mobileWarningModal && !sessionStorage.getItem('mobileWarningDismissed')) {
-    setTimeout(() => {
-      mobileWarningModal.classList.add('active');
-    }, 100);
+function closeMobileWarning() {
+  const el = document.getElementById('mobileWarning');
+  if (el) {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => el.style.display = 'none', 500);
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMobileWarning);
-} else {
-  initMobileWarning();
-}
-
-function dismissMobileWarning() {
-  const mobileWarningModal = document.getElementById('mobileWarningModal');
-  if (mobileWarningModal) {
-    mobileWarningModal.classList.remove('active');
-    sessionStorage.setItem('mobileWarningDismissed', 'true');
+// Auto-show only on mobile
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 768) {
+    const el = document.getElementById('mobileWarning');
+    if (el) el.style.display = 'flex';
   }
-}
+});
