@@ -1646,13 +1646,12 @@ body.late-night-active #heartCanvas {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
   }
   .btn-primary, .btn-secondary {
     width: 100%;
-    max-width: 280px;
     justify-content: center;
-    padding: 14px 28px;
+    padding: 16px 24px;
     font-size: 1rem;
   }
   .navbar { padding: 12px 20px; }
