@@ -118,13 +118,28 @@ export default function FinalLetterSequence() {
 
   if (!isActive) {
     return (
-      <div className="final-trigger-container">
-        <button 
-          className={`final-trigger-btn ${hasWatched ? 'watched' : ''}`} 
-          onClick={triggerSequence}
-        >
-          one last thing.
-        </button>
+      <div style={{ padding: '60px 20px 80px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ 
+          marginBottom: '40px', 
+          fontFamily: 'var(--font-serif)', 
+          color: 'rgba(255,255,255,0.5)', 
+          fontSize: '1.1rem',
+          lineHeight: '2',
+          letterSpacing: '1px',
+          fontStyle: 'italic'
+        }}>
+          <p>You've seen everything I built for you.</p>
+          <p>Every word, every memory, every feeling.</p>
+          <p style={{ marginTop: '20px' }}>But before you close this tab...</p>
+        </div>
+        <div className="final-trigger-container" style={{ padding: 0 }}>
+          <button 
+            className={`final-trigger-btn ${hasWatched ? 'watched' : ''}`} 
+            onClick={triggerSequence}
+          >
+            one last thing.
+          </button>
+        </div>
       </div>
     )
   }
