@@ -4,22 +4,42 @@ import './perf.css'
 import DualCursor from './components/DualCursor'
 import BirthdayFlow from './components/BirthdayFlow'
 import MainSite from './components/MainSite'
+import WarningScreen from './components/WarningScreen'
+import LockScreen from './components/LockScreen'
 
 export default function App() {
-  const [phase, setPhase] = useState('birthday') // 'birthday' | 'main'
+  const [phase, setPhase] = useState('birthday') // 'birthday' | 'warning' | 'lock' | 'main'
   const [isPlaying, setIsPlaying] = useState(false)
 
-  // Check view-once on mount
-  useEffect(() => {
-    localStorage.removeItem('siteDestroyed')
-  }, [])
+  // In production, we don't clear the localStorage.
+  // The site is meant to be viewed once.
+
+  const handleBirthdayEnter = () => {
+    setPhase('warning')
+  }
+
+  const handleWarningContinue = () => {
+    if (localStorage.getItem('onelastsmile_viewed') === 'true') {
+      setPhase('lock')
+    } else {
+      try { localStorage.setItem('onelastsmile_viewed', 'true') } catch (e) {}
+      setPhase('main')
+    }
+  }
 
   return (
     <>
       <DualCursor />
-      {phase === 'birthday' ? (
-        <BirthdayFlow onEnter={() => setPhase('main')} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-      ) : (
+      {phase === 'birthday' && (
+        <BirthdayFlow onEnter={handleBirthdayEnter} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+      )}
+      {phase === 'warning' && (
+        <WarningScreen onContinue={handleWarningContinue} />
+      )}
+      {phase === 'lock' && (
+        <LockScreen />
+      )}
+      {phase === 'main' && (
         <MainSite isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
       )}
     </>
