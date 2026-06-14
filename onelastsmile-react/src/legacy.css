@@ -1989,32 +1989,37 @@ html, body, * {
 /* ====== FINAL TRIGGER ====== */
 .final-trigger-container {
   width: 100%;
-  height: 40vh;
+  padding: 40px 0;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 10vh;
+  align-items: center;
 }
 
 .final-trigger-btn {
-  background: none;
-  border: none;
+  background: rgba(255, 77, 133, 0.1);
+  border: 1px solid rgba(255, 77, 133, 0.3);
+  padding: 15px 35px;
+  border-radius: 30px;
   font-family: monospace;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  opacity: 0.6;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  box-shadow: 0 0 20px rgba(255, 77, 133, 0.2);
+  transition: all 0.4s ease;
 }
 
 .final-trigger-btn:hover {
-  opacity: 1;
-  text-decoration: underline;
-  transform: translateX(2px);
+  background: rgba(255, 77, 133, 0.2);
+  border: 1px solid rgba(255, 77, 133, 0.5);
+  box-shadow: 0 0 30px rgba(255, 77, 133, 0.4);
+  transform: translateY(-2px);
 }
 
 .final-trigger-btn.watched {
-  opacity: 0.12;
+  opacity: 0.3;
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: transparent;
 }
 
 
