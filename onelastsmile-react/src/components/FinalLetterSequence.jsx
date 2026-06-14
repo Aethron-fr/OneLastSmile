@@ -123,7 +123,7 @@ export default function FinalLetterSequence() {
           className={`final-trigger-btn ${hasWatched ? 'watched' : ''}`} 
           onClick={triggerSequence}
         >
-          {hasWatched ? 'you stayed.' : 'one last thing.'}
+          one last thing.
         </button>
       </div>
     )
