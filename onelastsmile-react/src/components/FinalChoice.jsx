@@ -111,12 +111,25 @@ export default function FinalChoice({ isPlaying, setIsPlaying, audioRef }) {
             {choice === null && (
               <p>This website carries memories that mattered to me.<br/>But memories only stay if they are allowed to.</p>
             )}
-            {choice === null && (
-              <div className="final-buttons" id="finalButtons">
+              <div className="final-buttons" id="finalButtons" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginTop: '20px' }}>
                 <button id="keepBtn" className="btn-keep" onClick={keepStory}>Keep This Story</button>
-                <button id="fadeBtn" className="btn-fade" onClick={fadeAway}>Let It Fade Away</button>
+                <p 
+                  id="fadeBtn" 
+                  onClick={fadeAway}
+                  style={{
+                    color: 'rgba(255,255,255,0.4)',
+                    fontSize: '0.9rem',
+                    cursor: 'pointer',
+                    fontFamily: 'monospace',
+                    textTransform: 'lowercase',
+                    transition: 'color 0.3s ease'
+                  }}
+                  onMouseOver={(e) => e.target.style.color = 'rgba(255,255,255,0.8)'}
+                  onMouseOut={(e) => e.target.style.color = 'rgba(255,255,255,0.4)'}
+                >
+                  let it fade away...
+                </p>
               </div>
-            )}
           </div>
           {choice === 'keep' && (
             <>

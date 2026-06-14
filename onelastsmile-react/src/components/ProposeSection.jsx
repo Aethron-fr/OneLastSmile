@@ -81,9 +81,23 @@ export default function ProposeSection({ isPlaying, setIsPlaying, audioRef }) {
             <button className="btn-yes" id="yesBtn" onClick={sayYes}>
               <i className="fas fa-heart"></i> Yes!
             </button>
-            <button className="btn-no" id="noBtn" onMouseOver={handleNoHover} onClick={handleNoHover} style={{ background: '#333', color: '#fff', padding: '12px 30px', borderRadius: '25px', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '1.2rem', fontWeight: 'bold' }}>
-              <i className="fas fa-heart-broken"></i> No
-            </button>
+            <p 
+              className="btn-no-text" 
+              id="noBtn" 
+              onMouseOver={handleNoHover} 
+              onClick={handleNoHover} 
+              style={{ 
+                color: 'rgba(255,255,255,0.4)', 
+                fontSize: '0.85rem', 
+                cursor: 'pointer', 
+                marginTop: '15px',
+                fontFamily: 'monospace',
+                textTransform: 'lowercase',
+                transition: 'opacity 0.3s ease'
+              }}
+            >
+              i can't...
+            </p>
           </div>
         ) : (
           <div className="celebrate-message" id="celebrateMessage" style={{ display: 'block' }}>
