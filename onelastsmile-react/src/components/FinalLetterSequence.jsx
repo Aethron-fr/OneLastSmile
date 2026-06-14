@@ -97,6 +97,20 @@ export default function FinalLetterSequence() {
     setCurrentPage(-1)
   }
 
+  const skipToNext = () => {
+    if (!isActive || finished || currentPage === -1) return
+    if (currentPage === PAGES.length - 1) {
+      setFadeState('out')
+      setTimeout(() => setFinished(true), 1000)
+    } else {
+      setFadeState('out')
+      setTimeout(() => {
+        setCurrentPage(prev => prev + 1)
+        setFadeState('in')
+      }, 500)
+    }
+  }
+
   const triggerSequence = () => {
     setIsActive(true)
     document.body.style.overflow = 'hidden'
@@ -118,10 +132,14 @@ export default function FinalLetterSequence() {
   const page = currentPage >= 0 && currentPage < PAGES.length ? PAGES[currentPage] : null
 
   return (
-    <div className={`final-sequence-overlay ${finished ? 'fully-black' : ''} ${page?.effect === 'moon' ? 'moon-glow' : ''} ${page?.effect === 'rain' ? 'rain-distortion' : ''} ${page?.effect === 'crimson' ? 'crimson-glow' : ''}`}>
+    <div 
+      className={`final-sequence-overlay ${finished ? 'fully-black' : ''} ${page?.effect === 'moon' ? 'moon-glow' : ''} ${page?.effect === 'rain' ? 'rain-distortion' : ''} ${page?.effect === 'crimson' ? 'crimson-glow' : ''}`}
+      onClick={skipToNext}
+      style={{ cursor: 'pointer' }}
+    >
       
       {!finished && (
-        <div className="sequence-controls">
+        <div className="sequence-controls" onClick={(e) => e.stopPropagation()}>
           <button onClick={exitSequence}>Exit</button>
         </div>
       )}
@@ -143,6 +161,12 @@ export default function FinalLetterSequence() {
           </div>
         )}
       </div>
+      
+      {!finished && (
+        <div style={{ position: 'absolute', bottom: '30px', left: '50%', transform: 'translateX(-50%)', opacity: 0.3, fontSize: '0.8rem', fontFamily: 'monospace', pointerEvents: 'none' }}>
+          tap anywhere to continue
+        </div>
+      )}
     </div>
   )
 }
