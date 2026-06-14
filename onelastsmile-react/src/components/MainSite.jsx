@@ -20,6 +20,7 @@ import FinalLetterSequence from './FinalLetterSequence'
 import ContactSection from './ContactSection'
 import SiteFooter from './SiteFooter'
 import HeartCanvas from './HeartCanvas'
+import DownloadMemory from './DownloadMemory'
 
 export default function MainSite({ isPlaying, setIsPlaying }) {
   const [viewOnce, setViewOnce] = useState(false)
@@ -79,6 +80,7 @@ export default function MainSite({ isPlaying, setIsPlaying }) {
       <ProposeSection isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
       <FinalChoice isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
       <FinalLetterSequence />
+      <DownloadMemory />
       <SiteFooter />
     </div>
   )

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OneLastSmile — A Kept Memory</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;1,400&family=Lato:wght@300;400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; min-height: 100vh;
+    background: #06030d;
+    color: rgba(255, 210, 225, 0.82);
+    font-family: 'Playfair Display', Georgia, serif;
+    display: flex; align-items: center; justify-content: center;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 50% 40%,
+      rgba(255, 78, 205, 0.06) 0%,
+      rgba(168, 85, 247, 0.03) 40%,
+      transparent 72%);
+    pointer-events: none; z-index: 0;
+    animation: glowBreathe 10s ease-in-out infinite alternate;
+  }
+  @keyframes glowBreathe {
+    0%   { opacity: 0.5; transform: scale(0.96); }
+    100% { opacity: 1.0; transform: scale(1.06); }
+  }
+
+  /* Soft floating particles */
+  .particles {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: rgba(255, 105, 160, 0.30);
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1);   opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-100vh) scale(0.6); opacity: 0; }
+  }
+
+  .page {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 640px;
+    padding: 80px 48px 90px;
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    animation: pageIn 2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .brand {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: rgba(255, 78, 205, 0.22);
+    letter-spacing: 1.5px;
+    margin-bottom: 4rem;
+    animation: brandIn 2.2s ease 0.4s both;
+  }
+  @keyframes brandIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .divider {
+    width: 48px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,77,133,0.30), transparent);
+    margin: 2.6rem auto;
+  }
+
+  .stanza {
+    margin-bottom: 0;
+    opacity: 0;
+    animation: lineIn 1.4s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .stanza:nth-child(3)  { animation-delay: 0.6s; }
+  .stanza:nth-child(4)  { animation-delay: 1.4s; }
+  .stanza:nth-child(5)  { animation-delay: 2.2s; }
+  .stanza:nth-child(6)  { animation-delay: 3.2s; }
+  .stanza:nth-child(7)  { animation-delay: 4.2s; }
+  .stanza:nth-child(8)  { animation-delay: 5.4s; }
+  .stanza:nth-child(9)  { animation-delay: 6.6s; }
+  .stanza:nth-child(10) { animation-delay: 7.8s; }
+
+  @keyframes lineIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .stanza p {
+    font-size: clamp(0.98rem, 2.4vw, 1.15rem);
+    font-style: italic;
+    line-height: 2.0;
+    color: rgba(255, 210, 225, 0.78);
+    font-weight: 400;
+  }
+  .stanza p.lighter {
+    font-size: clamp(0.88rem, 2vw, 1.02rem);
+    color: rgba(220, 175, 200, 0.52);
+    font-style: normal;
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+    margin-top: 0.35rem;
+  }
+  .stanza p.softer {
+    font-size: clamp(0.82rem, 1.8vw, 0.94rem);
+    color: rgba(190, 150, 175, 0.40);
+    font-style: normal;
+    letter-spacing: 0.06em;
+    line-height: 1.75;
+    margin-top: 0.3rem;
+  }
+
+  .signature {
+    margin-top: 4.5rem;
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    color: rgba(255, 78, 205, 0.18);
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: lineIn 1.4s ease 9s both;
+  }
+
+  .date-stamp {
+    margin-top: 1.4rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(180, 130, 160, 0.28);
+    opacity: 0;
+    animation: lineIn 1.2s ease 10s both;
+  }
+
+  @media (max-width: 540px) {
+    .page { padding: 60px 28px 70px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Particles -->
+<div class="particles" id="pts"></div>
+
+<div class="page">
+
+  <p class="brand">OneLastSmile</p>
+
+  <div class="stanza">
+    <p>I don&rsquo;t think every feeling needs an ending.</p>
+    <p class="lighter">Some things just&hellip; remain.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stanza">
+    <p>Some people leave quietly&hellip;<br>but somehow stay in your everyday life.</p>
+    <p class="lighter">In small things. In passing thoughts.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stanza">
+    <p>Maybe this was only a small moment for the world.<br>But for me, it became a memory.</p>
+    <p class="softer">And I kept it.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stanza">
+    <p>I wasn&rsquo;t trying to make something perfect.<br>I just wanted you to feel cared for.</p>
+    <p class="lighter">Even from a distance.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stanza">
+    <p>And even if time changes everything&hellip;<br>some feelings remain strangely familiar.</p>
+    <p class="softer">That&rsquo;s how I&rsquo;ll always remember this.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stanza">
+    <p>Not every story is meant to stay.</p>
+    <p class="lighter">But some feelings do.</p>
+    <p class="softer">And maybe that&rsquo;s enough.</p>
+  </div>
+
+  <p class="signature">OneLastSmile</p>
+  <p class="date-stamp">Saved &mdash; 13 May 2026</p>
+
+</div>
+
+<script>
+  // Gentle floating particles — pure JS, no dependencies
+  var pts = document.getElementById('pts');
+  for (var i = 0; i < 22; i++) {
+    var p = document.createElement('div');
+    p.className = 'particle';
+    var size = Math.random() * 3 + 1;
+    p.style.cssText = [
+      'width:'  + size + 'px',
+      'height:' + size + 'px',
+      'left:'   + (Math.random() * 100) + '%',
+      'bottom:' + (-size) + 'px',
+      'animation-duration:' + (Math.random() * 18 + 14) + 's',
+      'animation-delay:'    + (Math.random() * 12) + 's',
+      'opacity: 0'
+    ].join(';');
+    pts.appendChild(p);
+  }
+</script>
+</body>
+</html>
