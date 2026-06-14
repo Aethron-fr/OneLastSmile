@@ -79,8 +79,8 @@ export default function MainSite({ isPlaying, setIsPlaying }) {
       <OneLastReply />
       <ProposeSection isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
       <FinalChoice isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
-      <FinalLetterSequence />
       <DownloadMemory />
+      <FinalLetterSequence />
       <SiteFooter />
     </div>
   )
