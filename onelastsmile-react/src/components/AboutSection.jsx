@@ -18,7 +18,7 @@ export default memo(function AboutSection() {
           <div className="about-avatar">
             <img src="/anushka_portrait.png" alt="Anushka" className="about-portrait"/>
           </div>
-          <div className="about-badge"><i className="fas fa-heart"></i> Very Special</div>
+          <div className="about-badge"><i className="fas fa-heart"></i> MY BIRTHDAY GIRL</div>
         </div>
         <div className="about-text reveal">
           <h3>Anushka</h3>
