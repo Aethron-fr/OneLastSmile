@@ -1569,7 +1569,7 @@ section { padding: 100px 5%; position: relative; }
 }
 
 .bd-text + .bd-text {
-  margin-top: -1.6rem;
+  margin-top: 0;
 }
 
 /* --- Next / action button --- */
@@ -1905,6 +1905,20 @@ html, body, * {
 
 .final-sequence-overlay.crimson-glow {
   background: radial-gradient(circle at 50% 80%, rgba(30, 5, 10, 0.4) 0%, #0f0514 50%);
+}
+
+.final-sequence-overlay.final-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(80, 10, 30, 0.6) 0%, #0f0514 70%);
+}
+
+.final-sequence-overlay.final-glow .sequence-text {
+  font-size: 1.6rem;
+  line-height: 2.2;
+  letter-spacing: 1px;
+  color: rgba(255, 200, 220, 0.95);
+  text-shadow:
+    0 0 20px rgba(255, 77, 133, 0.5),
+    0 0 60px rgba(255, 77, 133, 0.2);
 }
 
 .final-sequence-overlay.rain-distortion .sequence-grain {

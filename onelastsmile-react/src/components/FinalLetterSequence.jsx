@@ -28,7 +28,11 @@ const PAGES = [
   { id: 22, text: "Ami jani,\ntor hoyto kokhono amar dorkar hobena.\nHoito kokhono amake khujte ichaao korbina.\n\nBut still...\njodi kokhono koris,\ntahole khuje nish.\nAmi opekkhay thakbo.", holdTime: 7500, effect: 'crimson' },
   { id: 23, text: "And...\na really good goodbye.\n\nValo thakish re.\nKhub khushi thakish.", holdTime: 5000, effect: 'crimson' },
   { id: 24, text: "Aar hee,\ntui to janis ami guchiye kichu bolte parina.\nJa mone ashe,\ntai bole di.\n\nTobu o...\nei baar ektu guchiye bolar chesta korlam.\nJotota parlam.", holdTime: 7000, effect: 'crimson' },
-  { id: 25, text: "Tai kichu bhul hole,\nplease mind korish na.", holdTime: 5000, effect: 'crimson' }
+  { id: 25, text: "Tai kichu bhul hole,\nplease mind korish na.", holdTime: 5000, effect: 'crimson' },
+
+  // --- THE FINAL WORD ---
+  { id: 26, text: "", holdTime: 2500 }, // Silence before the last line
+  { id: 27, text: "sobar seshe...\n\n\nI love you, Anushka.", holdTime: 9000, effect: 'final' }
 ]
 
 export default function FinalLetterSequence() {
@@ -148,7 +152,7 @@ export default function FinalLetterSequence() {
 
   return (
     <div 
-      className={`final-sequence-overlay ${finished ? 'fully-black' : ''} ${page?.effect === 'moon' ? 'moon-glow' : ''} ${page?.effect === 'rain' ? 'rain-distortion' : ''} ${page?.effect === 'crimson' ? 'crimson-glow' : ''}`}
+      className={`final-sequence-overlay ${finished ? 'fully-black' : ''} ${page?.effect === 'moon' ? 'moon-glow' : ''} ${page?.effect === 'rain' ? 'rain-distortion' : ''} ${page?.effect === 'crimson' ? 'crimson-glow' : ''} ${page?.effect === 'final' ? 'final-glow' : ''}`}
       onClick={skipToNext}
       style={{ cursor: 'pointer' }}
     >
