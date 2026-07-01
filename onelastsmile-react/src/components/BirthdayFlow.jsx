@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 
-const TOTAL_STEPS = 7
+const TOTAL_STEPS = 8
 
 export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
-  const [screen, setScreen] = useState(1)      // 1-7, then 'final'
+  const [screen, setScreen] = useState(0)      // 0 (apology), 1-7, then 'final'
   const [exiting, setExiting] = useState(false)
   const [olsActive, setOlsActive] = useState(false)
   const [showPrompt, setShowPrompt] = useState(false)
@@ -125,16 +125,17 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
     }, 3600)
   }
 
-  const screens = [1,2,3,4,5,6,7]
+  const screens = [0,1,2,3,4,5,6,7]
 
   const screenData = {
-    1: { icon:'fas fa-gift',               ornament:'One Last Time',   heading:"Hey\u2026 I need to tell you something.",              text:"This isn\u2019t a birthday wish.\nIt\u2019s something I needed to say, once, before I go.", btnLabel:'Start',    btnAction: bdStart },
-    2: { icon:'fas fa-cake-candles',        ornament:'The Truth',    heading:'I\u2019m leaving, Anushka.',                 text:"Not for a few months.\nNot for university.\nFor good, this time.", btnLabel:'Next',     btnAction:()=>goNext(2) },
-    3: { icon:'fas fa-heart',               ornament:'Honestly',   heading:'This isn\u2019t me asking you to stop me.',text:"It\u2019s already decided \u2014 for me,\nand I think, quietly, for you too.", btnLabel:'Continue', btnAction:()=>goNext(3) },
-    4: { icon:'fas fa-sun',                 ornament:'After This',      heading:"After today, I won\u2019t be around anymore.",text:"New city. New number.\nNo more reaching out.\n\nNot because I\u2019m angry \u2014 because I finally have to let this go.", btnLabel:'Next', btnAction:()=>goNext(4) },
+    0: { icon:'fas fa-hand-holding-heart',  ornament:'Before anything else...',  heading:"I know I couldn\u2019t get you something expensive.",  text:"No fancy box. No big surprise. No gift wrapped in something shiny.\n\nBut I sat here, night after night, and I built you something\nout of the only thing I actually had\u2014\n\nevery single feeling I was too scared to say out loud.\n\nEvery line on this page was written with you in mind.\nEvery memory, every detail, every word\u2014\nthat was me giving you everything I had.\n\nI hope you feel that.", btnLabel:'I feel it', btnAction: ()=>{ tryStartMusic(); goNext(0) } },
+    1: { icon:'fas fa-gift',               ornament:'One Last Time',   heading:"Hey\u2026 today is your day.",              text:"I didn\u2019t want to just text you like everyone else.\nSo I made something.", btnLabel:'Start',    btnAction: bdStart },
+    2: { icon:'fas fa-cake-candles',        ornament:'The Truth',    heading:'I\u2019m leaving, Anushka.',                 text:"Not just another year\u2026\nbut another version of you\nthe world gets to become.", btnLabel:'Next',     btnAction:()=>goNext(2) },
+    3: { icon:'fas fa-heart',               ornament:'Honestly',   heading:'This isn\u2019t me asking you to stop me.',text:"I don\u2019t say this often.\nBut it\u2019s true, and it needed to be said.", btnLabel:'Continue', btnAction:()=>goNext(3) },
+    4: { icon:'fas fa-sun',                 ornament:'After This',      heading:"Today isn\u2019t about anything complicated.",text:"New city. New number.\nNo more reaching out.\n\nNot because I\u2019m angry \u2014 because I finally have to let this go.", btnLabel:'Next', btnAction:()=>goNext(4) },
     5: { icon:'fas fa-envelope-open-heart', ornament:'One Last Thing',     heading:'This is just something I wanted to give you, before I go.',text:"No expectations attached to it.\nThere never really were any.", btnLabel:'See More', btnAction:()=>goNext(5) },
-    6: { icon:'fas fa-star',                ornament:'Real Things', heading:"This was quiet, almost all of it.\nIt was still real.", text:"This was quiet, almost all of it.\nIt was still real.", btnLabel:'Continue', btnAction:()=>goNext(6) },
-    7: { icon:'fas fa-dove',                ornament:'Always',     heading:"So\u2026 I hope life is genuinely good to you.",              text:"I mean that without any conditions.\nTake care of yourself, Anushka.", btnLabel:'Finish', btnAction:()=>goNext(7) },
+    6: { icon:'fas fa-star',                ornament:'Real Things', heading:"Some things don\u2019t need to be loud to be real.", text:'Quiet can still mean genuine.', btnLabel:'Continue', btnAction:()=>goNext(6) },
+    7: { icon:'fas fa-dove',                ornament:'Always',     heading:"So yeah\u2026 Happy Birthday.",              text:"I mean that without any conditions.\nTake care of yourself, Anushka.", btnLabel:'Finish', btnAction:()=>goNext(7) },
   }
 
   return (
@@ -186,8 +187,8 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
             It was everything I couldn&rsquo;t say.
           </p>
           <p className="bd-text ols-support ols-line ols-line-3">
-            This is where it ends.<br/>
-            Let it end with a smile.
+            If this is where it ends,<br/>
+            let it end with a smile.
           </p>
           <button className="bd-btn bd-enter-btn ols-btn ols-line ols-line-4" id="enterBtn" onClick={bdEnter}>
             <span>One Last Smile</span>
