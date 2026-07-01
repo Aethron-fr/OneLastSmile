@@ -1592,7 +1592,7 @@ section { padding: 100px 5%; position: relative; }
   transition: transform 0.3s ease,
               box-shadow 0.3s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .bd-btn::before {
@@ -1602,7 +1602,8 @@ section { padding: 100px 5%; position: relative; }
   background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
   opacity: 0;
   transition: opacity 0.4s ease;
-  border-radius: inherit;
+  border-radius: 50px;
+  z-index: 0;
 }
 
 .bd-btn:hover {
