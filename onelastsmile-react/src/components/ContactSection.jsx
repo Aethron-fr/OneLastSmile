@@ -51,35 +51,38 @@ export default function ContactSection() {
   return (
     <section className="contact-section" id="contact" ref={sectionRef} style={{ padding: '100px 5%', background: 'var(--bg-dark)' }}>
       <div className="contact-container reveal" style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', marginBottom: '10px' }}>Get In Touch</h2>
-        <p style={{ opacity: 0.7, marginBottom: '40px' }}>Leave a message below.</p>
+        <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', marginBottom: '10px' }}>Say Something.</h2>
+        <p style={{ opacity: 0.7, marginBottom: '40px', fontFamily: 'var(--font-serif)', fontStyle: 'italic', lineHeight: '1.8' }}>
+          If this made you feel something... anything at all,<br/>
+          you don't have to keep it to yourself.
+        </p>
         
         {status === 'success' ? (
           <div style={{ padding: '40px', background: 'rgba(255,255,255,0.03)', borderRadius: '15px', border: '1px solid rgba(255,255,255,0.1)', animation: 'fadeInUp 0.8s ease' }}>
-            <h3 style={{ color: 'var(--primary-color)', marginBottom: '10px' }}>Message Sent</h3>
-            <p style={{ opacity: 0.8 }}>Thank you for reaching out. I'll get back to you soon.</p>
+            <h3 style={{ color: 'var(--primary-color)', marginBottom: '10px' }}>I heard you. 💗</h3>
+            <p style={{ opacity: 0.8, fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>Whatever you wrote, it means a lot. Really.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left', animation: 'fadeInUp 0.8s ease' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', opacity: 0.8, fontSize: '0.9rem' }}>Name</label>
-              <input required type="text" name="name" value={formData.name} onChange={handleChange} disabled={status === 'loading'}
+              <label style={{ display: 'block', marginBottom: '8px', opacity: 0.8, fontSize: '0.9rem' }}>Your name</label>
+              <input required type="text" name="name" value={formData.name} onChange={handleChange} disabled={status === 'loading'} placeholder="Who is this from?"
                 style={{ width: '100%', padding: '15px', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none', transition: 'border-color 0.3s' }}
                 onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                 onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
               />
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', opacity: 0.8, fontSize: '0.9rem' }}>Email</label>
-              <input required type="email" name="email" value={formData.email} onChange={handleChange} disabled={status === 'loading'}
+              <label style={{ display: 'block', marginBottom: '8px', opacity: 0.8, fontSize: '0.9rem' }}>Your email (optional)</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} disabled={status === 'loading'} placeholder="Only if you want a reply"
                 style={{ width: '100%', padding: '15px', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none', transition: 'border-color 0.3s' }}
                 onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                 onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
               />
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', opacity: 0.8, fontSize: '0.9rem' }}>Message</label>
-              <textarea required name="message" value={formData.message} onChange={handleChange} disabled={status === 'loading'} rows="5"
+              <label style={{ display: 'block', marginBottom: '8px', opacity: 0.8, fontSize: '0.9rem' }}>What's on your mind?</label>
+              <textarea required name="message" value={formData.message} onChange={handleChange} disabled={status === 'loading'} rows="5" placeholder="Say whatever you feel like saying..."
                 style={{ width: '100%', padding: '15px', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none', transition: 'border-color 0.3s', resize: 'vertical' }}
                 onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                 onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
@@ -100,7 +103,7 @@ export default function ContactSection() {
                 opacity: status === 'loading' ? 0.7 : 1
               }}
             >
-              {status === 'loading' ? 'Sending...' : 'Send Message'}
+              {status === 'loading' ? 'Sending...' : 'Send it 💌'}
             </button>
           </form>
         )}
