@@ -1557,6 +1557,20 @@ section { padding: 100px 5%; position: relative; }
   max-width: 780px;
 }
 
+/* ── Apology screen 0: smaller heading so everything fits ── */
+#bdScreen0 .bd-heading {
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  margin-bottom: 1rem;
+}
+#bdScreen0 .bd-text {
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  margin-bottom: 0.4rem;
+}
+#bdScreen0 .bd-btn {
+  margin-top: 1.2rem;
+}
+
 /* --- Body text --- */
 .bd-text {
   font-family: var(--font-serif);
