@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 
-const TOTAL_STEPS = 8
+const TOTAL_STEPS = 7
 
 export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
-  const [screen, setScreen] = useState(1)      // 1-8, then 'final'
+  const [screen, setScreen] = useState(1)      // 1-7, then 'final'
   const [exiting, setExiting] = useState(false)
   const [olsActive, setOlsActive] = useState(false)
   const [showPrompt, setShowPrompt] = useState(false)
@@ -125,17 +125,16 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
     }, 3600)
   }
 
-  const screens = [1,2,3,4,5,6,7,8]
+  const screens = [1,2,3,4,5,6,7]
 
   const screenData = {
-    1: { icon:'fas fa-gift',               ornament:'3 January',      heading:"Hey\u2026 today is your day.",              text:"I didn\u2019t want to just text you like everyone else.\nSo I made something.", btnLabel:'Start',    btnAction: bdStart },
-    2: { icon:'fas fa-heart',              ornament:'Before anything else\u2026',  heading:"I couldn\u2019t buy you something expensive.", text:"So I built you something instead.\nI hope you feel how much of me went into this.", btnLabel:'Open it', btnAction:()=>goNext(2) },
-    3: { icon:'fas fa-cake-candles',       ornament:'The Truth',      heading:'I\u2019m leaving, Anushka.',                text:"Not just another year\u2026\nbut another version of you\nthe world gets to become.", btnLabel:'Next',     btnAction:()=>goNext(3) },
-    4: { icon:'fas fa-heart',              ornament:'Honestly',       heading:'This isn\u2019t me asking you to stop me.',  text:"I don\u2019t say this often.\nBut it\u2019s true, and it needed to be said.", btnLabel:'Continue', btnAction:()=>goNext(4) },
-    5: { icon:'fas fa-sun',                ornament:'After This',     heading:"Today isn\u2019t about anything complicated.", text:"New city. New number.\nNo more reaching out.\n\nNot because I\u2019m angry \u2014 because I finally have to let this go.", btnLabel:'Next', btnAction:()=>goNext(5) },
-    6: { icon:'fas fa-envelope-open-heart',ornament:'One Last Thing', heading:'This is just something I wanted to give you, before I go.', text:"No expectations attached to it.\nThere never really were any.", btnLabel:'See More', btnAction:()=>goNext(6) },
-    7: { icon:'fas fa-star',               ornament:'Real Things',    heading:"Some things don\u2019t need to be loud to be real.", text:'Quiet can still mean genuine.', btnLabel:'Continue', btnAction:()=>goNext(7) },
-    8: { icon:'fas fa-dove',               ornament:'Always',         heading:"So yeah\u2026 Happy Birthday.",              text:"I mean that without any conditions.\nTake care of yourself, Anushka.", btnLabel:'Finish', btnAction:()=>goNext(8) },
+    1: { icon:'fas fa-gift',               ornament:'One Last Time',   heading:"Hey\u2026 today is your day.",              text:"I didn\u2019t want to just text you like everyone else.\nSo I made something.", btnLabel:'Start',    btnAction: bdStart },
+    2: { icon:'fas fa-cake-candles',        ornament:'The Truth',    heading:'I’m leaving, Anushka.',                 text:"Not just another year\u2026\nbut another version of you\nthe world gets to become.", btnLabel:'Next',     btnAction:()=>goNext(2) },
+    3: { icon:'fas fa-heart',               ornament:'Honestly',   heading:'This isn’t me asking you to stop me.',text:"I don\u2019t say this often.\nBut it\u2019s true, and it needed to be said.", btnLabel:'Continue', btnAction:()=>goNext(3) },
+    4: { icon:'fas fa-sun',                 ornament:'After This',      heading:"Today isn\u2019t about anything complicated.",text:"New city. New number.\nNo more reaching out.\n\nNot because I’m angry — because I finally have to let this go.", btnLabel:'Next', btnAction:()=>goNext(4) },
+    5: { icon:'fas fa-envelope-open-heart', ornament:'One Last Thing',     heading:'This is just something I wanted to give you, before I go.',text:"No expectations attached to it.\nThere never really were any.", btnLabel:'See More', btnAction:()=>goNext(5) },
+    6: { icon:'fas fa-star',                ornament:'Real Things', heading:"Some things don\u2019t need to be loud to be real.", text:'Quiet can still mean genuine.', btnLabel:'Continue', btnAction:()=>goNext(6) },
+    7: { icon:'fas fa-dove',                ornament:'Always',     heading:"So yeah\u2026 Happy Birthday.",              text:"I mean that without any conditions.\nTake care of yourself, Anushka.", btnLabel:'Finish', btnAction:()=>goNext(7) },
   }
 
   return (

@@ -15,16 +15,18 @@ export default function App() {
   // The site is meant to be viewed once.
 
   const handleBirthdayEnter = () => {
-    setPhase('warning')
-  }
-
-  const handleWarningContinue = () => {
+    // If already viewed, go straight to lock screen — skip warning
     if (localStorage.getItem('onelastsmile_viewed') === 'true') {
       setPhase('lock')
     } else {
-      try { localStorage.setItem('onelastsmile_viewed', 'true') } catch (e) {}
-      setPhase('main')
+      setPhase('warning')
     }
+  }
+
+  const handleWarningContinue = () => {
+    // First-time visitor — mark as viewed and let them in
+    try { localStorage.setItem('onelastsmile_viewed', 'true') } catch (e) {}
+    setPhase('main')
   }
 
   return (
