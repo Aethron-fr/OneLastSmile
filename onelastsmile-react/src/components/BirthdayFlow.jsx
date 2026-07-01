@@ -128,7 +128,7 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
   const screens = [0,1,2,3,4,5,6,7]
 
   const screenData = {
-    0: { icon:'fas fa-hand-holding-heart',  ornament:'Before anything else...',  heading:"This isn\u2019t wrapped in a box.", text:"I couldn\u2019t buy you something expensive.\nSo I built this instead.\n\nNight after night. Every word. Every memory.\nEvery feeling I was too scared to say.\n\nThat was me giving you everything I had.", btnLabel:'I feel it \u2192', btnAction: ()=>{ tryStartMusic(); goNext(0) } },
+    0: { icon:'fas fa-hand-holding-heart',  ornament:'Before anything else...',  heading:"This isn\u2019t wrapped in a box.", text:"I couldn\u2019t buy you something expensive.\nSo I built this instead.\n\nNight after night. Every word. Every memory.\nEvery feeling I was too scared to say.\n\nThat was me giving you everything I had.", btnLabel:'I feel it', btnAction: ()=>{ tryStartMusic(); goNext(0) } },
     1: { icon:'fas fa-gift',               ornament:'One Last Time',   heading:"Hey\u2026 today is your day.",              text:"I didn\u2019t want to just text you like everyone else.\nSo I made something.", btnLabel:'Start',    btnAction: bdStart },
     2: { icon:'fas fa-cake-candles',        ornament:'The Truth',    heading:'I\u2019m leaving, Anushka.',                 text:"Not just another year\u2026\nbut another version of you\nthe world gets to become.", btnLabel:'Next',     btnAction:()=>goNext(2) },
     3: { icon:'fas fa-heart',               ornament:'Honestly',   heading:'This isn\u2019t me asking you to stop me.',text:"I don\u2019t say this often.\nBut it\u2019s true, and it needed to be said.", btnLabel:'Continue', btnAction:()=>goNext(3) },
