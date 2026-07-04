@@ -35,19 +35,22 @@ export default function App() {
   // ── Birthday flow → Opening flow → Warning → Main ──
 
   const handleBirthdayEnter = () => {
-    // Return visitor: skip opening + warning, straight to lock
+    // Return visitor: skip everything, straight to lock
     if (localStorage.getItem('onelastsmile_viewed') === 'true') {
       setPhase('lock')
     } else {
-      setPhase('opening')
+      // First time: show warning FIRST before the opening
+      setPhase('warning')
     }
   }
 
-  const handleOpeningComplete = () => {
-    setPhase('warning')
+  const handleWarningContinue = () => {
+    // Warning accepted → now show the cinematic ONE LAST SMILE opening
+    setPhase('opening')
   }
 
-  const handleWarningContinue = () => {
+  const handleOpeningComplete = () => {
+    // Opening done → mark viewed and enter the main site
     try { localStorage.setItem('onelastsmile_viewed', 'true') } catch (e) {}
     setPhase('main')
   }

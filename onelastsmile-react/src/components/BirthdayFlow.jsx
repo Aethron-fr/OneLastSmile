@@ -178,22 +178,49 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
       <div className={`bd-screen${screen==='final'&&!exiting?' active':''}${olsActive?' ols-active':''}`} id="bdScreenFinal">
         <div className="ols-glow-blob"></div>
         <div className="ols-vignette"></div>
+
+        {/* Floating stars for cosmic effect */}
+        <div className="ols-cosmos">
+          {[...Array(12)].map((_,i) => (
+            <span key={i} className="ols-star" style={{
+              left: `${Math.round(8 + i * 7.2)}%`,
+              top: `${Math.round(10 + (i % 5) * 18)}%`,
+              animationDelay: `${(i * 0.4).toFixed(1)}s`,
+              fontSize: `${0.4 + (i % 3) * 0.25}rem`
+            }}>✦</span>
+          ))}
+        </div>
+
         <div className="ols-content">
           <div className="bd-ornament ols-ornament">OneLastSmile</div>
+
+          <div className="ols-heart-beat ols-line ols-line-0">
+            <i className="fas fa-heart" style={{ color: 'var(--primary-color)', fontSize: '2rem' }}></i>
+          </div>
+
           <h2 className="bd-heading ols-heading ols-line ols-line-1">One Last Smile.</h2>
+
           <p className="bd-text ols-sub ols-line ols-line-2">
             This was never just a page&hellip;<br/>
-            It was everything I couldn&rsquo;t say.
+            It was everything I couldn&rsquo;t say out loud.
           </p>
+
           <p className="bd-text ols-support ols-line ols-line-3">
             If this is where it ends,<br/>
-            let it end with a smile.
+            let it end beautifully.
           </p>
-          <button className="bd-btn bd-enter-btn ols-btn ols-line ols-line-4" id="enterBtn" onClick={bdEnter}>
+
+          {/* One-time warning */}
+          <p className="ols-once-warning ols-line ols-line-4">
+            <i className="fas fa-lock" style={{ fontSize: '0.75rem', marginRight: '6px' }}></i>
+            You can only see this once. Read every word slowly.
+          </p>
+
+          <button className="bd-btn bd-enter-btn ols-btn ols-line ols-line-5" id="enterBtn" onClick={bdEnter}>
             <span>One Last Smile</span>
             <i className="fas fa-arrow-right"></i>
           </button>
-          <p className="ols-signature ols-line ols-line-5">&mdash; OneLastSmile</p>
+          <p className="ols-signature ols-line ols-line-6">&mdash; with love, Swapnadip</p>
         </div>
       </div>
 

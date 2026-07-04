@@ -2327,3 +2327,82 @@ html, body, * {
   color: var(--primary-color);
   font-weight: 700;
 }
+
+/* ====== ONE LAST SMILE - COSMIC UPGRADE ====== */
+.ols-cosmos {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ols-star {
+  position: absolute;
+  color: rgba(255, 77, 133, 0.4);
+  animation: olsStarPulse 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 8px rgba(255, 77, 133, 0.5);
+}
+
+@keyframes olsStarPulse {
+  0%   { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 0.9; transform: scale(1.3); }
+}
+
+.ols-heart-beat {
+  margin-bottom: 1.2rem;
+}
+
+.ols-heart-beat i {
+  animation: heartbeat 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(255, 77, 133, 0.8));
+}
+
+/* One-time warning badge */
+.ols-once-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 77, 133, 0.08);
+  border: 1px solid rgba(255, 77, 133, 0.2);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-family: var(--font-body);
+  font-size: 0.82rem !important;
+  color: rgba(255, 182, 210, 0.75) !important;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.8rem !important;
+  font-style: normal !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Extend OLS line animations for new lines */
+#bdScreenFinal.ols-active .ols-line-0 {
+  opacity: 1; filter: blur(0); transform: translateY(0);
+  transition: opacity 1s ease 0s, filter 1s ease 0s, transform 1s ease 0s;
+}
+#bdScreenFinal.ols-active .ols-line-5 {
+  opacity: 1; filter: blur(0); transform: translateY(0);
+  transition: opacity 0.9s ease 2.6s, filter 0.9s ease 2.6s, transform 0.9s ease 2.6s;
+}
+#bdScreenFinal.ols-active .ols-line-6 {
+  opacity: 1; filter: blur(0); transform: translateY(0);
+  transition: opacity 0.8s ease 3.4s, filter 0.8s ease 3.4s, transform 0.8s ease 3.4s;
+}
+
+/* Upgrade glow blob to be more cosmic */
+.ols-glow-blob {
+  background: radial-gradient(circle,
+    rgba(255, 77, 133, 0.22) 0%,
+    rgba(162, 57, 202, 0.15) 40%,
+    rgba(80, 0, 160, 0.08) 70%,
+    transparent 100%) !important;
+  width: 700px !important;
+  height: 700px !important;
+  animation: olsBlobPulse 6s ease-in-out infinite !important;
+}
+
+@keyframes olsBlobPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50%       { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
+}
