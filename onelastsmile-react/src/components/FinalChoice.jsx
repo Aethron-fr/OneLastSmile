@@ -12,7 +12,7 @@ function sendDecisionEmail(type) {
   }
 }
 
-export default function FinalChoice({ isPlaying, setIsPlaying, audioRef }) {
+export default function FinalChoice({ isPlaying, setIsPlaying, audioRef, setMood }) {
   const [choice, setChoice] = useState(null) // null | 'keep' | 'fade'
   const [fadeActive, setFadeActive] = useState(false)
   const [confirmation, setConfirmation] = useState(false)
@@ -36,16 +36,23 @@ export default function FinalChoice({ isPlaying, setIsPlaying, audioRef }) {
     localStorage.setItem('decision', 'keep')
     setChoice('keep')
     showConfirmation()
+    if (setMood) setMood('hopeful')
   }
 
   const fadeAway = () => {
+    // ── PERMANENT LOCK: this device can never re-enter the site ──
+    localStorage.setItem('oneLastSmile_faded', 'true')
+
     sendDecisionEmail('fade')
     localStorage.setItem('decision', 'fade')
     setChoice('fade')
     setFadeActive(true)
     showConfirmation()
 
-    // stop music
+    // mood music — fade to silence, no loop
+    if (setMood) setMood('fading', { loop: false })
+
+    // stop main music
     if (isPlaying) {
       audioRef.current?.pause()
       setIsPlaying(false)

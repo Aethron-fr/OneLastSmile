@@ -22,7 +22,7 @@ import SiteFooter from './SiteFooter'
 import HeartCanvas from './HeartCanvas'
 import DownloadMemory from './DownloadMemory'
 
-export default function MainSite({ isPlaying, setIsPlaying }) {
+export default function MainSite({ isPlaying, setIsPlaying, setMood }) {
   const [viewOnce, setViewOnce] = useState(false)
   const audioRef = useRef(null)
 
@@ -78,7 +78,7 @@ export default function MainSite({ isPlaying, setIsPlaying }) {
       <IfYouNeverReadThis />
       <OneLastReply />
       <ProposeSection isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
-      <FinalChoice isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
+      <FinalChoice isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} setMood={setMood} />
       <DownloadMemory />
       <FinalLetterSequence />
       <SiteFooter />
