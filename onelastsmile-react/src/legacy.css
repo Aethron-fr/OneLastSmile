@@ -2288,3 +2288,42 @@ html, body, * {
 .lock-line-1 { font-size: clamp(1.2rem, 4vw, 1.7rem); }
 .lock-line-2 { font-size: clamp(1rem, 3.2vw, 1.35rem); color: rgba(255, 200, 220, 0.72); text-shadow: 0 0 6px rgba(255, 105, 160, 0.35), 0 0 16px rgba(255, 105, 160, 0.15); }
 
+
+/* ====== WARNING SCREEN UPGRADES ====== */
+.warning-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.warning-brand-icon {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  animation: heartbeat 1.5s infinite;
+}
+
+.warning-brand-name {
+  font-family: var(--font-cursive);
+  font-size: 1.8rem;
+  color: rgba(255, 182, 210, 0.9);
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(255, 77, 133, 0.4);
+}
+
+.warning-body-fade {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.warning-body-fade.warning-body-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.warning-body strong {
+  color: var(--primary-color);
+  font-weight: 700;
+}

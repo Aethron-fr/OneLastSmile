@@ -2,31 +2,64 @@ import { useState, useEffect } from 'react'
 
 export default function WarningScreen({ onContinue }) {
   const [visible, setVisible] = useState(false)
+  const [step, setStep]       = useState(0) // 0 = intro, 1 = body, 2 = button
 
   useEffect(() => {
-    // slight delay to allow transition from birthday flow
-    const t = setTimeout(() => setVisible(true), 380)
-    return () => clearTimeout(t)
+    const t0 = setTimeout(() => setVisible(true), 300)
+    const t1 = setTimeout(() => setStep(1), 1200)
+    const t2 = setTimeout(() => setStep(2), 2600)
+    return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2) }
   }, [])
 
   const handleContinue = () => {
     setVisible(false)
-    setTimeout(() => {
-      onContinue()
-    }, 600)
+    setTimeout(() => onContinue(), 700)
   }
 
   return (
-    <div id="warningScreen" className={visible ? 'warning-visible' : ''} style={{ display: 'flex' }}>
+    <div
+      id="warningScreen"
+      className={visible ? 'warning-visible' : ''}
+      style={{ display: 'flex' }}
+    >
       <div className="warning-content">
-        <p className="warning-pre">Before you go further&hellip;</p>
-        <div className="warning-body">
-          <p>This isn&rsquo;t just a page.</p>
-          <p>It&rsquo;s something that was written once&hellip;<br/>and meant to be felt once.</p>
-          <p>So if you choose to continue,<br/>read it slowly.</p>
+
+        {/* Brand mark */}
+        <div className="warning-brand">
+          <i className="fas fa-heart warning-brand-icon"></i>
+          <span className="warning-brand-name">OneLastSmile</span>
         </div>
-        <p className="warning-soft">Some things don&rsquo;t come back twice.</p>
-        <button className="warning-btn" onClick={handleContinue} style={{ touchAction: 'manipulation' }}>I Understand &rarr;</button>
+
+        {/* Headline */}
+        <p className="warning-pre">This was made just for you.</p>
+
+        {/* Body lines */}
+        <div className={`warning-body warning-body-fade ${step >= 1 ? 'warning-body-visible' : ''}`}>
+          <p>It&rsquo;s not just a website.</p>
+          <p>It&rsquo;s everything I never said out loud,<br/>put into something you can actually see.</p>
+          <p>
+            You can only open this <strong>once.</strong><br/>
+            Once you leave&hellip; it won&rsquo;t be the same.
+          </p>
+        </div>
+
+        {/* Soft note */}
+        <p className={`warning-soft warning-body-fade ${step >= 1 ? 'warning-body-visible' : ''}`}
+           style={{ transitionDelay: '0.6s' }}>
+          Some things only happen once. Read it slowly.
+        </p>
+
+        {/* CTA */}
+        <div className={`warning-body-fade ${step >= 2 ? 'warning-body-visible' : ''}`}>
+          <button
+            className="warning-btn"
+            onClick={handleContinue}
+            style={{ touchAction: 'manipulation' }}
+          >
+            I&rsquo;m ready &rarr;
+          </button>
+        </div>
+
       </div>
     </div>
   )
