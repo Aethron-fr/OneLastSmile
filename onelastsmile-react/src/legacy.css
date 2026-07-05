@@ -2406,3 +2406,200 @@ html, body, * {
   0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
   50%       { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
 }
+
+/* ====== CURSOR HEART TRAIL ====== */
+.cursor-trail-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  animation: trailFloat 0.9s ease-out forwards;
+  font-style: normal;
+  line-height: 1;
+}
+
+@keyframes trailFloat {
+  0%   { opacity: 1;   transform: translate(-50%, -50%) rotate(var(--angle)) scale(1);    }
+  40%  { opacity: 0.8; }
+  100% { opacity: 0;   transform: translate(calc(-50% + var(--drift)), calc(-50% - 36px)) rotate(calc(var(--angle) * 1.5)) scale(0.4); }
+}
+
+/* ====== DATE COUNTER ====== */
+.footer-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 32px;
+}
+
+.footer-counter-number {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  text-shadow: none;
+  filter: drop-shadow(0 0 18px rgba(255, 77, 133, 0.4));
+}
+
+.footer-counter-label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 182, 210, 0.5);
+}
+
+/* ====== SECRET LETTER TRIGGER ====== */
+.secret-trigger {
+  position: relative;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-style: italic;
+  font-weight: 600;
+  border-bottom: 1px dotted rgba(255, 77, 133, 0.35);
+  transition: color 0.3s, border-color 0.3s;
+  display: inline-block;
+  padding: 0 2px;
+}
+
+.secret-trigger:hover {
+  color: #ff85b3;
+  border-color: rgba(255, 77, 133, 0.7);
+}
+
+.secret-trigger.secret-triggering {
+  color: #ff85b3;
+  text-shadow: 0 0 10px rgba(255, 77, 133, 0.6);
+}
+
+.secret-progress-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px; height: 40px;
+  pointer-events: none;
+}
+
+.footer-hint {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 182, 210, 0.2);
+  margin-top: -6px;
+  margin-bottom: 18px;
+  transition: color 0.4s;
+}
+
+.footer-hint:hover { color: rgba(255, 182, 210, 0.4); }
+
+/* ====== SECRET LETTER MODAL ====== */
+.secret-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  background: rgba(4, 1, 8, 0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  backdrop-filter: blur(6px);
+}
+
+.secret-overlay.secret-open {
+  opacity: 1;
+}
+
+.secret-overlay.secret-closing {
+  opacity: 0;
+}
+
+.secret-modal {
+  max-width: 580px;
+  width: 100%;
+  background: rgba(20, 5, 35, 0.95);
+  border: 1px solid rgba(255, 77, 133, 0.15);
+  border-radius: 20px;
+  padding: 48px 44px;
+  box-shadow:
+    0 0 60px rgba(255, 77, 133, 0.08),
+    0 0 120px rgba(162, 57, 202, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: secretModalIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes secretModalIn {
+  0%   { opacity: 0; transform: translateY(30px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+.secret-found-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 77, 133, 0.08);
+  border: 1px solid rgba(255, 77, 133, 0.2);
+  color: rgba(255, 182, 210, 0.8);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+}
+
+.secret-letter-body {
+  font-family: var(--font-serif);
+  font-size: clamp(0.95rem, 2.2vw, 1.08rem);
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.82);
+  text-align: left;
+  margin-bottom: 36px;
+}
+
+.secret-letter-body p {
+  margin: 0 0 4px 0;
+}
+
+.secret-signature {
+  font-style: italic;
+  color: rgba(255, 182, 210, 0.7) !important;
+  margin-top: 20px !important;
+  font-size: 1.1rem !important;
+  text-shadow: 0 0 12px rgba(255, 77, 133, 0.3);
+}
+
+.secret-close-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 77, 133, 0.25);
+  color: rgba(255, 77, 133, 0.7);
+  padding: 10px 28px;
+  border-radius: 30px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+.secret-close-btn:hover {
+  background: rgba(255, 77, 133, 0.08);
+  border-color: rgba(255, 77, 133, 0.6);
+  color: rgba(255, 77, 133, 1);
+}
+
+.secret-footer-note {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 182, 210, 0.2);
+  font-style: italic;
+}
