@@ -9,16 +9,59 @@ import WarningScreen from './components/WarningScreen'
 import LockScreen from './components/LockScreen'
 import FadedScreen from './components/FadedScreen'
 import useMoodMusic from './hooks/useMoodMusic'
+import PreludeScreen, { shouldShowPrelude } from './components/PreludeScreen'
 
 const LOCK_KEY = 'oneLastSmile_faded'
+
+// ── Global Mute Button (dev helper) ───────────────────────
+function GlobalMuteBtn() {
+  const [muted, setMuted] = useState(false)
+
+  const toggle = () => {
+    const next = !muted
+    setMuted(next)
+    // Mute every <audio> element in the DOM instantly
+    document.querySelectorAll('audio').forEach(a => { a.muted = next })
+  }
+
+  return (
+    <button
+      onClick={toggle}
+      title={muted ? 'Unmute' : 'Mute all audio'}
+      style={{
+        position:   'fixed',
+        bottom:     '20px',
+        right:      '20px',
+        zIndex:     1000001,
+        background: muted ? 'rgba(255,77,133,0.18)' : 'rgba(20,5,35,0.75)',
+        border:     `1px solid ${muted ? 'rgba(255,77,133,0.6)' : 'rgba(255,255,255,0.15)'}`,
+        color:      muted ? '#ff4d85' : 'rgba(255,255,255,0.6)',
+        borderRadius: '50%',
+        width:      '42px',
+        height:     '42px',
+        fontSize:   '1rem',
+        cursor:     'pointer',
+        display:    'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backdropFilter: 'blur(8px)',
+        transition: 'all 0.25s ease',
+        boxShadow:  muted ? '0 0 14px rgba(255,77,133,0.3)' : 'none',
+      }}
+    >
+      <i className={`fas ${muted ? 'fa-volume-mute' : 'fa-volume-up'}`}></i>
+    </button>
+  )
+}
 
 export default function App() {
   // ── PERMANENT LOCK: check this FIRST, before anything else ──
   const isPermanentlyLocked = localStorage.getItem(LOCK_KEY) === 'true'
 
   const [phase, setPhase] = useState(() => {
-    // If permanently locked → jump straight to faded screen
     if (isPermanentlyLocked) return 'faded'
+    // Show prelude intro once per session (or if ?prelude=1)
+    if (shouldShowPrelude()) return 'prelude'
     return 'birthday'
   })
 
@@ -32,7 +75,9 @@ export default function App() {
     return <FadedScreen />
   }
 
-  // ── Birthday flow → Opening flow → Warning → Main ──
+  // ── Prelude → Birthday flow → Warning → Opening → Main ──
+
+  const handlePreludeDone = () => setPhase('birthday')
 
   const handleBirthdayEnter = () => {
     // Return visitor: skip everything, straight to lock
@@ -58,6 +103,13 @@ export default function App() {
   return (
     <>
       <DualCursor />
+
+      {/* 🔇 Global mute button — always visible for dev work */}
+      <GlobalMuteBtn />
+
+      {phase === 'prelude' && (
+        <PreludeScreen onEnter={handlePreludeDone} />
+      )}
 
       {phase === 'birthday' && (
         <BirthdayFlow
@@ -92,3 +144,4 @@ export default function App() {
     </>
   )
 }
+

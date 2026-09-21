@@ -2603,3 +2603,234 @@ html, body, * {
   color: rgba(255, 182, 210, 0.2);
   font-style: italic;
 }
+
+/* ================================================================
+   PRELUDE SCREEN — "Before you enter" cinematic intro
+   ================================================================ */
+
+.prl-root {
+  position: fixed;
+  inset: 0;
+  z-index: 99000;
+  background: var(--bg-dark);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.9s ease;
+  overflow: hidden;
+}
+
+.prl-root.prl-exit {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Ambient soft glow blob */
+.prl-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: min(600px, 90vw);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 77, 133, 0.06) 0%,
+    rgba(162, 57, 202, 0.04) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: prlGlowPulse 7s ease-in-out infinite alternate;
+}
+
+@keyframes prlGlowPulse {
+  0%   { opacity: 0.6; transform: translate(-50%, -50%) scale(1);    }
+  100% { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* Scrollable wrapper so very long content is reachable on tiny phones */
+.prl-scroll-area {
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+.prl-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 620px;
+  text-align: center;
+}
+
+/* ── Lines ─────────────────────────────── */
+.prl-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 56px;
+}
+
+.prl-line {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.6vw, 1.22rem);
+  line-height: 1.85;
+  color: rgba(254, 240, 245, 0.0); /* start invisible */
+  transform: translateY(14px);
+  transition:
+    color      1.1s ease,
+    transform  1.1s ease,
+    opacity    1.1s ease;
+  margin-bottom: 28px;
+  white-space: pre-line;
+  letter-spacing: 0.01em;
+}
+
+.prl-line--final {
+  margin-bottom: 0;
+}
+
+.prl-line--visible {
+  color: rgba(254, 240, 245, 0.88);
+  transform: translateY(0);
+}
+
+/* Emphasis — italic + soft primary-color glow */
+.prl-em {
+  font-style: italic;
+  color: var(--primary-color);
+  text-shadow:
+    0 0 12px rgba(255, 77, 133, 0.45),
+    0 0 28px rgba(255, 77, 133, 0.18);
+}
+
+/* ── Skip hint ─────────────────────────── */
+.prl-skip-hint {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(254, 240, 245, 0.2);
+  margin-top: -16px;
+  margin-bottom: 0;
+  animation: prlSkipBlink 2.8s ease-in-out infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes prlSkipBlink {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.55; }
+}
+
+/* ── Buttons ───────────────────────────── */
+.prl-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1s ease, transform 1s ease;
+  pointer-events: none;
+}
+
+.prl-btns--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Primary button */
+.prl-btn-primary {
+  background: transparent;
+  border: 1px solid rgba(255, 77, 133, 0.55);
+  color: var(--text-light);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  padding: 14px 40px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition:
+    background  0.3s ease,
+    border-color 0.3s ease,
+    box-shadow  0.3s ease,
+    color       0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.prl-btn-primary:hover,
+.prl-btn-primary:focus-visible {
+  background:    rgba(255, 77, 133, 0.12);
+  border-color:  rgba(255, 77, 133, 0.85);
+  box-shadow:    0 0 22px rgba(255, 77, 133, 0.25);
+  color:         #fff;
+  outline: none;
+}
+
+/* Secondary button */
+.prl-btn-secondary {
+  background: transparent;
+  border: none;
+  color: rgba(254, 240, 245, 0.32);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prl-btn-secondary:hover,
+.prl-btn-secondary:focus-visible {
+  color: rgba(254, 240, 245, 0.62);
+  outline: none;
+}
+
+/* ── Decline message ───────────────────── */
+.prl-decline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 40px 0;
+  animation: prlFadeIn 1.2s ease both;
+}
+
+.prl-decline p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.8vw, 1.28rem);
+  line-height: 1.9;
+  color: rgba(254, 240, 245, 0.72);
+  max-width: 480px;
+  text-align: center;
+}
+
+@keyframes prlFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Reduced motion override ───────────── */
+@media (prefers-reduced-motion: reduce) {
+  .prl-line       { transition: none; }
+  .prl-btns       { transition: none; }
+  .prl-glow       { animation: none; }
+  .prl-skip-hint  { animation: none; opacity: 0.4; }
+  .prl-root       { transition: none; }
+}
+
+/* ── Mobile ────────────────────────────── */
+@media (max-width: 480px) {
+  .prl-scroll-area  { padding: 40px 20px; }
+  .prl-line         { font-size: 0.97rem; margin-bottom: 22px; }
+  .prl-btn-primary  { padding: 13px 32px; font-size: 0.95rem; }
+}
