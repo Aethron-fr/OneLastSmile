@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import Navbar from './Navbar'
 import Hero from './Hero'
 import AboutSection from './AboutSection'
@@ -23,39 +23,11 @@ import HeartCanvas from './HeartCanvas'
 import DownloadMemory from './DownloadMemory'
 
 export default function MainSite({ isPlaying, setIsPlaying, setMood }) {
-  const [viewOnce, setViewOnce] = useState(false)
   const audioRef = useRef(null)
-
-  useEffect(() => {
-    // view-once check
-    if (localStorage.getItem('hasVisited') === 'true' && !sessionStorage.getItem('allowAccess')) {
-      setViewOnce(true)
-      document.body.style.overflow = 'hidden'
-    } else {
-      localStorage.setItem('hasVisited', 'true')
-    }
-  }, [])
-
-  const openAgain = () => {
-    sessionStorage.setItem('allowAccess', 'true')
-    setViewOnce(false)
-    document.body.style.overflow = ''
-  }
 
   return (
     <div id="mainSite">
       <HeartCanvas />
-
-      {/* View Once Screen */}
-      {viewOnce && (
-        <div className="view-once-screen" style={{ display: 'flex' }}>
-          <div className="view-once-content">
-            <p>This story was meant to be seen once.</p>
-            <p>If you&rsquo;re here again,<br/>maybe it already meant something.</p>
-            <button className="btn-open-again" onClick={openAgain}>Open Again</button>
-          </div>
-        </div>
-      )}
 
       {/* Loader */}
       <Loader />

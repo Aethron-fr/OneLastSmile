@@ -14,14 +14,16 @@ import PreludeScreen, { shouldShowPrelude } from './components/PreludeScreen'
 const LOCK_KEY = 'oneLastSmile_faded'
 
 // ── Global Mute Button (dev helper) ───────────────────────
-function GlobalMuteBtn() {
+function GlobalMuteBtn({ onMuteChange }) {
   const [muted, setMuted] = useState(false)
 
   const toggle = () => {
     const next = !muted
     setMuted(next)
-    // Mute every <audio> element in the DOM instantly
+    // Mute every DOM <audio> element (birthday song)
     document.querySelectorAll('audio').forEach(a => { a.muted = next })
+    // Also mute programmatic mood Audio objects via hook callback
+    onMuteChange?.(next)
   }
 
   return (
@@ -68,7 +70,7 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   // Mood music hook (Part 2)
-  const { setMood, stopMood } = useMoodMusic()
+  const { setMood, setMuted } = useMoodMusic()
 
   // If faded, render immediately — no site init, no audio preload, nothing
   if (phase === 'faded') {
@@ -105,7 +107,7 @@ export default function App() {
       <DualCursor />
 
       {/* 🔇 Global mute button — always visible for dev work */}
-      <GlobalMuteBtn />
+      <GlobalMuteBtn onMuteChange={setMuted} />
 
       {phase === 'prelude' && (
         <PreludeScreen onEnter={handlePreludeDone} />

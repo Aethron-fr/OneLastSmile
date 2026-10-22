@@ -61,6 +61,7 @@ export default function SecretLetter() {
 
   const cancelHold = () => {
     if (phase !== 'unlocking') return
+    if (progress > 0.95) return  // too close to done — let it finish, no flicker
     cancelAnimationFrame(rafId.current)
     setPhase('hidden')
     setProgress(0)

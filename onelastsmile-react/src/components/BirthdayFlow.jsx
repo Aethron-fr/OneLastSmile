@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 const TOTAL_STEPS = 7
+let _olsExiting = false  // module-level flag — avoids window pollution & HMR issues
 
 export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
   const [screen, setScreen] = useState(1)      // 1-7, then 'final'
@@ -91,8 +92,8 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
 
   /* ── cinematic exit ── */
   const bdEnter = () => {
-    if (window._olsExiting) return
-    window._olsExiting = true
+    if (_olsExiting) return
+    _olsExiting = true
 
     // fade audio out
     const audio = audioRef.current
@@ -115,7 +116,7 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
     setTimeout(() => {
       try { sessionStorage.setItem('allowAccess', 'true') } catch (_) {}
       onEnter()
-      window._olsExiting = false
+      _olsExiting = false
       setTimeout(() => {
         if (blackout) {
           blackout.style.transition = 'opacity 1.6s ease'

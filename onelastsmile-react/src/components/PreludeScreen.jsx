@@ -183,9 +183,9 @@ export default function PreludeScreen({ onEnter }) {
   return (
     <div
       className={`prl-root${exiting ? ' prl-exit' : ''}`}
-      onClick={!showButtons ? skip : undefined}
+      onClick={!showButtons ? (e) => { if (!e.target.closest('button')) skip() } : undefined}
       aria-label="Before you enter"
-      role="main"
+      role="region"
     >
       {/* Subtle ambient glow */}
       <div className="prl-glow" aria-hidden="true" />

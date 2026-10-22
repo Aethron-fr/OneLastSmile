@@ -86,5 +86,9 @@ export default function useMoodMusic() {
     }, fadeMs / steps)
   }, [])
 
-  return { setMood, stopMood }
+  const setMuted = useCallback((muted) => {
+    if (currentAudioRef.current) currentAudioRef.current.muted = muted
+  }, [])
+
+  return { setMood, stopMood, setMuted }
 }

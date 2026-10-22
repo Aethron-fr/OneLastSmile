@@ -118,10 +118,12 @@ export default function FinalChoice({ isPlaying, setIsPlaying, audioRef, setMood
             {choice === null && (
               <p>This website carries memories that mattered to me.<br/>But memories only stay if they are allowed to.</p>
             )}
+            {choice === null && (
               <div className="final-buttons" id="finalButtons">
                 <button id="keepBtn" className="btn-keep" onClick={keepStory}>Keep This Story</button>
                 <button id="fadeBtn" className="btn-fade" onClick={fadeAway}>Let It Fade Away</button>
               </div>
+            )}
           </div>
           {choice === 'keep' && (
             <>
