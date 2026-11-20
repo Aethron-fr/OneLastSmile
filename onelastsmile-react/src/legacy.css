@@ -1531,8 +1531,8 @@ section { padding: 100px 5%; position: relative; }
 
 /* --- Decorative top icon --- */
 .bd-icon {
-  font-size: 2.8rem;
-  margin-bottom: 1.4rem;
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
   color: var(--primary-color);
   text-shadow: 0 0 22px rgba(255, 77, 133, 0.7);
   animation: bdIconPulse 2.8s ease-in-out infinite;
@@ -1546,13 +1546,13 @@ section { padding: 100px 5%; position: relative; }
 /* --- Main heading --- */
 .bd-heading {
   font-family: var(--font-cursive);
-  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
   background: linear-gradient(135deg, #ffb3c6 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.15;
-  margin-bottom: 1.6rem;
+  line-height: 1.1;
+  margin-bottom: 0.9rem;
   text-shadow: none;
   max-width: 780px;
 }
@@ -1562,9 +1562,9 @@ section { padding: 100px 5%; position: relative; }
   font-family: var(--font-serif);
   font-size: clamp(1.1rem, 2.5vw, 1.45rem);
   color: var(--text-muted);
-  line-height: 1.85;
+  line-height: 1.65;
   max-width: 660px;
-  margin: 0 auto 2.4rem;
+  margin: 0 auto 1.2rem;
   font-style: italic;
 }
 
@@ -1623,7 +1623,7 @@ section { padding: 100px 5%; position: relative; }
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 1.8rem;
+  margin-bottom: 0.9rem;
   color: var(--secondary-color);
   opacity: 0.6;
   font-size: 0.75rem;
