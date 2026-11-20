@@ -3980,6 +3980,7 @@ body.atmosphere-deep {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
+  margin-right: 0.28em;
 }
 .word-span {
   display: inline-block;

@@ -1968,15 +1968,18 @@ document.addEventListener("click", () => {
     if (!text.trim()) return;
 
     el.innerHTML = '';
-    const words = text.split(' ');
-    words.forEach(word => {
+    const words = text.split(/\s+/).filter(Boolean);
+    words.forEach((word, index) => {
       const wrap = document.createElement('span');
       wrap.className = 'word-reveal-wrap';
       const span = document.createElement('span');
       span.className = 'word-span';
-      span.innerText = word + ' ';
+      span.textContent = word;
       wrap.appendChild(span);
       el.appendChild(wrap);
+      if (index < words.length - 1) {
+        el.appendChild(document.createTextNode(' '));
+      }
     });
   });
 
