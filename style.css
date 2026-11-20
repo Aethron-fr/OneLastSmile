@@ -4089,6 +4089,15 @@ body.atmosphere-deep {
   box-shadow: 0 0 20px rgba(255, 77, 133, 0.2);
   transform: translateY(-2px);
 }
+.reply-container.submitted .reply-icon,
+.reply-container.submitted .reply-title,
+.reply-container.submitted .reply-intro,
+.reply-container.submitted .reply-form-wrapper {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .reply-success {
   position: absolute;
   top: 0;

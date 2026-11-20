@@ -2039,14 +2039,29 @@ window.submitReply = function() {
   .then(() => {
     // Cinematic Fold Away
     wrapper.classList.add('submitted');
+    const container = document.querySelector('.reply-container');
     const intro = document.querySelector('.reply-intro');
+    const title = document.querySelector('.reply-title');
+    const icon = document.querySelector('.reply-icon');
+
+    if (container) container.classList.add('submitted');
     if (intro) {
       intro.style.transition = 'opacity 0.8s ease';
       intro.style.opacity = '0';
     }
+    if (title) {
+      title.style.transition = 'opacity 0.8s ease';
+      title.style.opacity = '0';
+    }
+    if (icon) {
+      icon.style.transition = 'opacity 0.8s ease';
+      icon.style.opacity = '0';
+    }
     setTimeout(() => {
       wrapper.style.display = 'none';
       if (intro) intro.style.display = 'none';
+      if (title) title.style.display = 'none';
+      if (icon) icon.style.display = 'none';
       success.style.display = 'flex';
       success.offsetHeight; // Trigger layout
       success.classList.add('active');
