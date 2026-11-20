@@ -10,12 +10,12 @@ export default memo(function Hero() {
         </p>
         <h1 className="hero-name fade-in-up" style={{ animationDelay: '0.6s' }}>Anushka</h1>
         <p className="hero-tagline fade-in-up" style={{ animationDelay: '0.9s' }}>
-          I never asked you to love me.<br/>
-          I only wished to stay somewhere in your world.<br/>
-          This is just what I felt, honestly and quietly.
+          I never really found the right words to explain how much you mean to me.<br/>
+          So instead of writing another message, I made this little world for you.<br/>
+          Everything here comes from my memories, my feelings and the moments I have carried with me.
         </p>
         <div className="hero-from fade-in-up" style={{ animationDelay: '1.2s' }}>
-          <span>— Written patiently from my heart, Swapnadip</span>
+          <span>— Swapnadip</span>
         </div>
         <div className="hero-buttons fade-in-up" style={{ animationDelay: '1.5s' }}>
           <a href="#propose" className="btn-primary">

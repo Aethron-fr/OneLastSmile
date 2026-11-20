@@ -13,23 +13,34 @@ function sendDecisionEmail(type) {
 }
 
 export default function FinalChoice({ isPlaying, setIsPlaying, audioRef, setMood }) {
-  const [choice, setChoice] = useState(null) // null | 'keep' | 'fade'
+  const [choice, setChoice] = useState(() => {
+    try {
+      const stored = localStorage.getItem('decision')
+      return stored === 'keep' || stored === 'fade' ? stored : null
+    } catch {
+      return null
+    }
+  })
   const [fadeActive, setFadeActive] = useState(false)
   const [confirmation, setConfirmation] = useState(false)
   const ref = useRef(null)
 
   useEffect(() => {
-    // Restore permanence if previously decided
-    const stored = localStorage.getItem('decision')
-    if (stored === 'keep') setChoice('keep')
-    if (stored === 'fade') setChoice('fade') // but we don't fade actively on return, just show they faded it
-
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active') })
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
     ref.current?.querySelectorAll('.reveal').forEach(el => obs.observe(el))
     return () => obs.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (fadeActive) {
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = ''
+      }
+    }
+  }, [fadeActive])
 
   const keepStory = () => {
     sendDecisionEmail('keep')
@@ -57,7 +68,6 @@ export default function FinalChoice({ isPlaying, setIsPlaying, audioRef, setMood
       audioRef.current?.pause()
       setIsPlaying(false)
     }
-    document.body.style.overflow = 'hidden'
 
     // canvas fade
     const canvas = document.getElementById('heartCanvas')

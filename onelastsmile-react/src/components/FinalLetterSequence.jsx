@@ -1,38 +1,70 @@
 import { useState, useEffect } from 'react'
 
 const PAGES = [
-  // --- HINDI / URDU SECTION ---
-  { id: 1, text: "I really used to ask God one thing over and over again —\n\n“Why can’t you just be mine?”", holdTime: 4500 },
-  { id: 2, text: "I kept praying for you.\nAgain and again.\nThinking maybe someday,\nif I asked enough,\nif I loved enough,\nif I waited enough,\nmaybe life would finally bring you to me.", holdTime: 6500 },
-  { id: 3, text: "But one day I realized,\nmaybe this was never about my prayers or manifestations.\n\nMaybe I kept asking for someone\nwho never truly wanted me back.", holdTime: 6000 },
-  { id: 4, text: "Shayad tumne kabhi mera pyaar dekha hi nahi.\nYa shayad maine hi tumhe kabhi theek se samjha nahi.\n\nAur ho sakta hai —\ntumne dekh kar bhi kabhi koshish nahi ki mujhe samajhne ki.", holdTime: 6500 },
-  { id: 5, text: "Shayad yehi meri kismat hai.\n\nLekin tum chinta mat karo.\nMain iss janam mein aakhri din tak tumhe maangta rahunga.\nKya pata…\nshayad kabhi na kabhi\nupar wala tumhe de hi de mujhe.", holdTime: 7000 },
-  { id: 6, text: "Shayad kabhi tumhe mera pyaar dikh jaaye.\nShayad kabhi tum mere paas aakar thoda thehar jao.\nAur bolo—\n\n“Main aa gaya hoon.\nAb nahi jaunga tumhe chhod kar.”", holdTime: 6500 },
-  { id: 7, text: "Mujhe pata hai,\nye shayad kabhi sach nahi hoga.\n\nPhir bhi,\nmain intezar karta rahunga.\nAur intezar sirf iss janam tak nahi.", holdTime: 6000 },
-  { id: 8, text: "Agar kabhi dobara janam mila,\naur agar mujhe sab yaad raha,\ntoh main phir bhi tumhe hi maangunga.", holdTime: 5500 },
-  { id: 9, text: "Iss janam mein bhi,\nmaine tumhe usse bheekh mein maanga.\nUsne nahi diya.\nShayad uski marzi thi.\n\nMaine tumhe tumse bhi maanga.\nTumne nahi samjha.\nShayad woh tumhari marzi thi.", holdTime: 7000 },
-  { id: 10, text: "Lekin main tumse pyaar karun ya na karun,\ntumhe chahun ya na chahun —\nye meri marzi hai.\n\nNa isme tumhara haq banta hai,\nna uska.", holdTime: 6000 },
-  { id: 11, text: "Ye mera pyaar hai.\nMeri marzi hai.", holdTime: 5000 }, // Silence point
-  { id: 12, text: "Aur akhir mein bas itna hi kahunga—\n\nTum meri chaand ho.\nJise roz door se dekh kar\nchhoone ki tamanna toh kar sakta hoon,\nlekin kabhi chhoo nahi paunga.", holdTime: 6500, effect: 'moon' },
-  { id: 13, text: "Phir bhi roz uske sapne dekhta hoon.", holdTime: 3500, effect: 'moon' },
-  { id: 14, text: "Tumhara naam meri zindagi ki woh baarish hai\njo bas kuch waqt ke liye aayi thi,\nlekin itna sukoon de gayi\nki ab poori zindagi\nsirf ussi ka intezar kar sakta hoon.", holdTime: 7000, effect: 'rain' },
-  { id: 15, text: "Aur akhir mein bas yehi—\n\nTum jiske bhi saath ho,\nkhush rehna.\nBas khush rehna.\nYehi meri prarthana hai.", holdTime: 6000 },
-  { id: 16, text: "Aur agar kabhi meri yaad aaye,\ntoh dhoond lena mujhe.\n\nShayad…\nkahin mil jaaun.", holdTime: 5500 },
-  { id: 17, text: "", holdTime: 3000 }, // Silence
-
-  // --- BENGALI SECTION ---
-  { id: 18, text: "Janish,\ntoke onek kichu bolte ichaa kore.\nEto kichu bolar achey je\nhoito ekta life o kom pore jabe sobta bolar jonno.", holdTime: 6000, effect: 'crimson' },
-  { id: 19, text: "Tai bhablam,\nei chotto website ta baniye jai.\nHoyto purota bojhate parbena,\nkintu jotota perechi,\ntotota rekhe gelam ekhane.", holdTime: 6000, effect: 'crimson' },
-  { id: 20, text: "Hoito er por ami number change kore nebo.\nHoito call e ar pabi na.\nHoito dekhao hobena.\nCause ekhane theke chole jabo ami.", holdTime: 6000, effect: 'crimson' },
-  { id: 21, text: "Kintu sotti bolchi,\njodi kokhono amar kotha mone pore,\nba khujte ichaa hoy,\ntahole peye jabi.\nTar onek rasta achey.", holdTime: 6000, effect: 'crimson' },
-  { id: 22, text: "Ami jani,\ntor hoyto kokhono amar dorkar hobena.\nHoito kokhono amake khujte ichaao korbina.\n\nBut still...\njodi kokhono koris,\ntahole khuje nish.\nAmi opekkhay thakbo.", holdTime: 7500, effect: 'crimson' },
-  { id: 23, text: "And...\na really good goodbye.\n\nValo thakish re.\nKhub khushi thakish.", holdTime: 5000, effect: 'crimson' },
-  { id: 24, text: "Aar hee,\ntui to janis ami guchiye kichu bolte parina.\nJa mone ashe,\ntai bole di.\n\nTobu o...\nei baar ektu guchiye bolar chesta korlam.\nJotota parlam.", holdTime: 7000, effect: 'crimson' },
-  { id: 25, text: "Tai kichu bhul hole,\nplease mind korish na.", holdTime: 5000, effect: 'crimson' },
-
-  // --- THE FINAL WORD ---
-  { id: 26, text: "", holdTime: 2500 }, // Silence before the last line
-  { id: 27, text: "sobar seshe...\n\n\nI love you, Anushka.", holdTime: 9000, effect: 'final' }
+  {
+    id: 1,
+    text: "Anushka,\n\nI don't think I have ever managed to explain how much you mean to me.",
+    holdTime: 5500,
+    effect: 'crimson'
+  },
+  {
+    id: 2,
+    text: "I still remember the day I first noticed you in Class 9.\n\nI remember the conversations after Class 10 results.\n\nI remember so many ordinary moments that became important to me simply because you were part of them.",
+    holdTime: 6500,
+  },
+  {
+    id: 3,
+    text: "I never expected that one person could become such an important part of my life.\n\nBut somehow, you did.\n\nYou became someone whose happiness mattered deeply to me.",
+    holdTime: 6000,
+  },
+  {
+    id: 4,
+    text: "I love you, Anushka.\n\nI don't think I can simply switch these feelings off.\n\nAnd I don't want to pretend that I will stop caring about you just because life is taking us in different directions.",
+    holdTime: 6500,
+    effect: 'crimson'
+  },
+  {
+    id: 5,
+    text: "Knowing that we may never meet again hurts more than I can explain.\n\nI wish things could have been different.\n\nI wish I had more time to tell you everything properly.\n\nBut I know that some things cannot be changed just because we wish they were different.",
+    holdTime: 7000,
+  },
+  {
+    id: 6,
+    text: "I am not writing this to make you feel responsible for my sadness.\n\nYou have your own life, your own feelings and your own decisions.\n\nI respect that.\n\nI just wanted you to understand what you have meant to me.",
+    holdTime: 6500,
+  },
+  {
+    id: 7,
+    text: "Maybe after this, we won't speak or meet again.\n\nI don't know what the future holds.\n\nBut I know that the feelings I have carried for you are not something I will forget overnight.",
+    holdTime: 6500,
+  },
+  {
+    id: 8,
+    text: "I think a part of me will always love you.\n\nEven if life takes us far away from each other, I will always wish you happiness.\n\nI will always hope that you are safe, healthy and surrounded by people who genuinely care about you.",
+    holdTime: 7000,
+    effect: 'moon'
+  },
+  {
+    id: 9,
+    text: "I may not always be physically beside you.\n\nBut wherever life takes me, I will always carry care and affection for you.\n\nI will never wish anything bad for you.\n\nI will always want the best for you.",
+    holdTime: 6500,
+  },
+  {
+    id: 10,
+    text: "This website is my last personal gift from my side.\n\nI spent so much time making it because I wanted to give you something that could hold a little part of what I could never explain properly.",
+    holdTime: 6500,
+  },
+  {
+    id: 11,
+    text: "I don't expect a reply.\n\nI don't expect you to feel the same.\n\nI don't want you to feel guilty.\n\nI just wanted to be honest with you one last time.",
+    holdTime: 6000,
+  },
+  {
+    id: 12,
+    text: "Thank you for being such an important part of my life, Anushka.\n\nI hope life gives you every happiness you deserve.\n\nI will always love you in my own way.\n\nTake care of yourself.\n\nAnd please, keep smiling.\n\nHappy Birthday.\n\n— Swapnadip",
+    holdTime: 8500,
+    effect: 'final'
+  }
 ]
 
 export default function FinalLetterSequence() {
@@ -41,13 +73,13 @@ export default function FinalLetterSequence() {
   const [fadeState, setFadeState] = useState('in')
   const [finished, setFinished] = useState(false)
   const [showSignature, setShowSignature] = useState(false)
-  const [hasWatched, setHasWatched] = useState(false)
-
-  useEffect(() => {
-    if (localStorage.getItem('watchedFinalSequence') === 'true') {
-      setHasWatched(true)
+  const [hasWatched, setHasWatched] = useState(() => {
+    try {
+      return localStorage.getItem('watchedFinalSequence') === 'true'
+    } catch {
+      return false
     }
-  }, [])
+  })
 
   useEffect(() => {
     if (!isActive || finished) return

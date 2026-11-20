@@ -3,15 +3,37 @@ import { useReveal } from '../hooks/useReveal'
 
 const LETTER_TEXT = `Anushka,
 
-I've held onto these words for so long, partly because I didn't know how to say them, and partly because I didn't want to ruin whatever small space I had in your life.
+I don't know where to begin because there is so much I have wanted to tell you.
 
-It all started in Class 9. I remember seeing you standing in front of Ayan sir's batch. It wasn't anything cinematic, just a quiet moment that somehow anchored itself in my mind. By the time Class 10 results came out, we were talking. Those conversations stretched into hours, and without me even noticing, you became the quiet comfort of my everyday life. 
+I still remember seeing you back in Class 9. At that time, I had no idea how important you would eventually become in my life.
 
-When I finally told you how I felt, the misunderstanding that followed hurt more than I can explain. The distance grew. I remember that day you were eating fuchka with the others, and I was sitting across the road, shaking, unable to stand, crying silently onto a friend's shoulder. The tightness in my chest was unbearable. I tried so hard to move on after that, but I never truly forgot you.
+After our Class 10 results, when we started talking more, those conversations slowly became something I looked forward to.
 
-Then the gym brought us close again. It was the only place I could see you every day, and I held onto that routine because, outside of it, you never really needed me. I know you know how I feel. And I know sometimes my presence bothers you, like when you complained about me just looking at you. I never meant to make you uncomfortable.
+I remember the little things. The ordinary conversations, the familiar moments and the days when simply talking to you made me happy.
 
-I just loved you—silently and patiently. I never asked you to love me back. I only wished to stay somewhere in your world.`
+When I told you how I felt, things did not happen the way I had hoped. There were misunderstandings, distance and moments that were genuinely painful for me.
+
+I tried to understand everything and tried to move forward, but my feelings never disappeared as easily as I thought they would.
+
+I know that I cannot decide how you feel.
+
+I know that love cannot be demanded or expected in return.
+
+But I also don't want to pretend that what I felt was small.
+
+I love you, Anushka.
+
+You have been an incredibly important part of my life, and I will always remember that.
+
+I wish things could have been different.
+
+I wish I could have said everything properly while we still had the chance.
+
+But even if our paths never cross again, I will always hope that life treats you kindly.
+
+Thank you for being a part of my story.
+
+— Swapnadip`
 
 export default function LoveLetter() {
   const [displayed, setDisplayed] = useState('')

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 const TOTAL_STEPS = 7
 let _olsExiting = false  // module-level flag — avoids window pollution & HMR issues
 
-export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
+export default function BirthdayFlow({ onEnter, setIsPlaying }) {
   const [screen, setScreen] = useState(1)      // 1-7, then 'final'
   const [exiting, setExiting] = useState(false)
   const [olsActive, setOlsActive] = useState(false)
@@ -25,7 +25,6 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
     const particles = Array.from({ length: 70 }, () => makePart(canvas))
 
     function makePart(c) {
-      const types = ['heart', 'star', 'dot']
       const colors = ['255,77,133', '162,57,202', '255,179,198', '255,255,255']
       return {
         x: Math.random() * c.width, y: Math.random() * c.height,
@@ -114,7 +113,11 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
       if (blackout) blackout.classList.add('glow-pulse')
     }, 1900)
     setTimeout(() => {
-      try { sessionStorage.setItem('allowAccess', 'true') } catch (_) {}
+      try {
+        sessionStorage.setItem('allowAccess', 'true')
+      } catch {
+        // ignore
+      }
       onEnter()
       _olsExiting = false
       setTimeout(() => {
@@ -129,13 +132,13 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
   const screens = [1,2,3,4,5,6,7]
 
   const screenData = {
-    1: { icon:'fas fa-gift',               ornament:'3 JANUARY',       heading:"Hey\u2026 today is your day.",              text:"I didn\u2019t want to just text you like everyone else.\nSo I built something.", btnLabel:'Start \u2192',    btnAction: bdStart },
-    2: { icon:'fas fa-cake-candles',       ornament:'Happy Birthday',  heading:'Happy Birthday, Anushka.',             text:"Another year older.\nAnother version of you\nthe world gets to be lucky enough to know.", btnLabel:'Next',     btnAction:()=>goNext(2) },
-    3: { icon:'fas fa-heart',              ornament:'Honestly',        heading:'You matter more than you probably know.', text:"Not just to me.\nBut genuinely, truly\u2014\nyou are someone worth celebrating.", btnLabel:'Continue', btnAction:()=>goNext(3) },
-    4: { icon:'fas fa-sun',                ornament:'Today',           heading:"Today isn\u2019t about anything complicated.", text:"No weight. No noise.\n\nJust you, exactly as you are.", btnLabel:'Next', btnAction:()=>goNext(4) },
-    5: { icon:'fas fa-gift',               ornament:'A Gift',          heading:'I made something for you.', text:"No strings attached.\nNo expectations.\n\nJust something real, from me.", btnLabel:'Open It', btnAction:()=>goNext(5) },
-    6: { icon:'fas fa-star',               ornament:'The Truth',       heading:"Some things don\u2019t need to be loud to be real.", text:"What I feel for you is quiet.\nBut it is one of the most genuine things\nI\u2019ve ever felt.", btnLabel:'Continue', btnAction:()=>goNext(6) },
-    7: { icon:'fas fa-dove',               ornament:'Always',          heading:"So yeah\u2026 Happy Birthday.",              text:"I hope life gives you everything you deserve.\n\nAnd I genuinely, truly\u2014 mean that.", btnLabel:'Enter \u2192', btnAction:()=>goNext(7) },
+    1: { icon:'fas fa-gift',               ornament:'3 JANUARY',       heading:"Hey\u2026 today is your day.",              text:"I didn\u2019t want to just text you like everyone else.\nSo I built something.", btnLabel:'Start \u2192' },
+    2: { icon:'fas fa-cake-candles',       ornament:'Happy Birthday',  heading:'Happy Birthday, Anushka.',             text:"Another year older.\nAnother version of you\nthe world gets to be lucky enough to know.", btnLabel:'Next' },
+    3: { icon:'fas fa-heart',              ornament:'Honestly',        heading:'You matter more than you probably know.', text:"Not just to me.\nBut genuinely, truly\u2014\nyou are someone worth celebrating.", btnLabel:'Continue' },
+    4: { icon:'fas fa-sun',                ornament:'Today',           heading:"Today isn\u2019t about anything complicated.", text:"No weight. No noise.\n\nJust you, exactly as you are.", btnLabel:'Next' },
+    5: { icon:'fas fa-gift',               ornament:'A Gift',          heading:'I made something for you.', text:"No strings attached.\nNo expectations.\n\nJust something real, from me.", btnLabel:'Open It' },
+    6: { icon:'fas fa-star',               ornament:'The Truth',       heading:"Some things don\u2019t need to be loud to be real.", text:"What I feel for you is quiet.\nBut it is one of the most genuine things\nI\u2019ve ever felt.", btnLabel:'Continue' },
+    7: { icon:'fas fa-dove',               ornament:'Always',          heading:"So yeah\u2026 Happy Birthday.",              text:"I hope life gives you everything you deserve.\n\nAnd I genuinely, truly\u2014 mean that.", btnLabel:'Enter \u2192' },
   }
 
   return (
@@ -168,7 +171,7 @@ export default function BirthdayFlow({ onEnter, isPlaying, setIsPlaying }) {
             {d.text.split('\n').map((line, i) =>
               line === '' ? <br key={i}/> : <p key={i} className="bd-text">{line}</p>
             )}
-            <button className="bd-btn" onClick={d.btnAction}>
+            <button className="bd-btn" onClick={() => n === 1 ? bdStart() : goNext(n)}>
               <span>{d.btnLabel}</span> <i className="fas fa-chevron-right"></i>
             </button>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo } from 'react'
+import { useState, useEffect, memo, Fragment } from 'react'
 import { useReveal } from '../hooks/useReveal'
 
 function pad(n, len = 2) { return String(n).padStart(len, '0') }
@@ -51,13 +51,13 @@ export default memo(function BirthdayCountdown() {
         <p className="birthday-age" id="birthdayAge">{age}</p>
         <div className="countdown-container" id="countdown">
           {[['Days', time.days], ['Hours', time.hours], ['Minutes', time.minutes], ['Seconds', time.seconds]].map(([label, val], i) => (
-            <React.Fragment key={label}>
+            <Fragment key={label}>
               {i > 0 && <div className="countdown-separator">:</div>}
               <div className="countdown-item">
                 <span className="countdown-number">{val}</span>
                 <span className="countdown-label">{label}</span>
               </div>
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
         <p className="birthday-wish">

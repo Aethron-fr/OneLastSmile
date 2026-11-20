@@ -18,7 +18,8 @@ export default memo(function StorySection() {
           <p>Even if you never stay beside me,<br/>I will still care for you quietly.<br/>Even if you never understand my feelings,<br/>I could never bring myself to hate you.<br/>And if life ever brings you back someday,<br/>I will still accept you, without a single question.</p>
           <p>I learned to love without any expectation.<br/>To wait for you without forcing anything.<br/>My feelings simply stayed true in the silence.</p>
           <p style={{ fontSize:'1.15rem', marginTop:'2rem', textAlign:'center', color:'var(--accent)' }}>
-            তোকে পাওয়াই আমার ভালোবাসা ছিল না,<br/>তোকে ভালোবাসাটাই ছিল আমার পাওয়া।
+            Loving you was never about having you in my life.<br/>
+            Simply having the chance to care for you was already everything to me.
           </p>
         </div>
       </div>

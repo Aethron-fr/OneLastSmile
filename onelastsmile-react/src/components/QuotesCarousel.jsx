@@ -2,11 +2,11 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useReveal } from '../hooks/useReveal'
 
 const quotes = [
-  { text: "I never wanted to have you. I just wanted to keep seeing you.", author: "— A silent wish" },
-  { text: "Even if you never choose me, I'll still choose you.",           author: "— Quiet devotion" },
-  { text: "If you ever come back someday, I'll still be there.",           author: "— Waiting patiently" },
-  { text: "I don't know why I love you. If someone asks me the reason, I still don't have an answer. I just do.", author: "— The simple truth" },
-  { text: "I never asked you to love me. I only wished to stay somewhere in your world.", author: "— Just staying close" },
+  { text: "Loving you was never about demanding your affection. It was simply about appreciating that you existed in my life.", author: "— An honest feeling" },
+  { text: "Some people stay in your memory not because you forced them to, but because they left something genuine behind.", author: "— Quiet thoughts" },
+  { text: "I may not know what the future holds, but I know that caring about you was one of the most real things I ever felt.", author: "— Acceptance" },
+  { text: "Even if our conversations belong to the past, the gratitude I feel for having known you will always remain.", author: "— With sincerity" },
+  { text: "I never wanted to complicate your world. I only wanted you to know that someone quietly wished the best for you.", author: "— Always" },
 ]
 
 export default function QuotesCarousel() {

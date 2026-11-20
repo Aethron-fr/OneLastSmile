@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import Hero from './Hero'
 import AboutSection from './AboutSection'

@@ -21,18 +21,6 @@ export default function ProposeSection({ isPlaying, setIsPlaying, audioRef }) {
     }
   }
 
-  const handleNoHover = (e) => {
-    const btn = e.target
-    const maxX = window.innerWidth - btn.offsetWidth - 20
-    const maxY = window.innerHeight - btn.offsetHeight - 20
-    const x = Math.random() * maxX
-    const y = Math.random() * maxY
-    btn.style.position = 'fixed'
-    btn.style.left = `${x}px`
-    btn.style.top = `${y}px`
-    btn.style.zIndex = 9999
-  }
-
   const createFireworks = () => {
     const container = document.getElementById('fireworks')
     if (!container) return

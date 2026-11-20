@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { markPrologueSeen } from '../utils/prelude'
 
 /* ─────────────────────────────────────────────
    DIALOGUE DATA
@@ -107,19 +108,6 @@ function renderRuns(runs) {
 }
 
 /* ─────────────────────────────────────────────
-   SESSION / DEV GATE
-───────────────────────────────────────────── */
-const SESSION_KEY = 'ols_prelude_seen'
-export function shouldShowPrelude() {
-  const forceShow = new URLSearchParams(window.location.search).get('prelude') === '1'
-  if (forceShow) return true
-  return sessionStorage.getItem(SESSION_KEY) !== 'true'
-}
-function markPrologueSeen() {
-  try { sessionStorage.setItem(SESSION_KEY, 'true') } catch (_) {}
-}
-
-/* ─────────────────────────────────────────────
    MAIN COMPONENT
 ───────────────────────────────────────────── */
 export default function PreludeScreen({ onEnter }) {
@@ -155,7 +143,8 @@ export default function PreludeScreen({ onEnter }) {
     }, BUTTONS_DELAY)
     timersRef.current.push(tb)
 
-    return () => timersRef.current.forEach(clearTimeout)
+    const activeTimers = timersRef.current
+    return () => activeTimers.forEach(clearTimeout)
   }, [])
 
   // Skip: reveal all remaining lines immediately

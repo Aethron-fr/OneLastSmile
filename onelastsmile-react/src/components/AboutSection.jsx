@@ -27,8 +27,7 @@ export default memo(function AboutSection() {
             When we started talking more after the Class 10 results, those long conversations felt like the most normal and comforting part of my day.
           </p>
           <p>
-            You are sometimes kind, sometimes distant, and sometimes hard to understand. But I never hated you.
-            I just learned to accept you exactly as you are, loving you silently and patiently.
+            You have always been someone genuine and uniquely yourself. I never looked for an idealized version of you—I just learned to appreciate you exactly as you are, caring for you quietly and patiently.
           </p>
           <div className="about-traits">
             {[

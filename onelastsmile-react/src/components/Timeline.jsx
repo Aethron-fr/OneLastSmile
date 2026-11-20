@@ -18,24 +18,19 @@ const events = [
     body: "I gathered the courage to tell you how I felt. It wasn't done perfectly, but it was honest. Unfortunately, misunderstandings happened, and a quiet distance slowly began to grow between us after that.",
   },
   {
-    side: 'right', icon: 'fa-utensils', date: 'Fuchka Day',
-    title: 'One Evening That Felt Quieter Than Usual',
-    body: "You and the others went to eat fuchka together, and I wasn't called. I just sat quietly on the opposite side of the road. I didn't have any dramatic reaction; it was just a quiet moment of realizing how alone I felt.",
+    side: 'right', icon: 'fa-utensils', date: 'An Evening in Memory',
+    title: 'When Distance Began to Settle In',
+    body: "I remember an evening seeing you with everyone else, and for the first time, I felt the quiet reality of how far apart we had grown. It wasn't about anger or resentment—it was just a heavy realization that things were no longer the same.",
   },
   {
-    side: 'left', icon: 'fa-dumbbell', date: 'Gym Days',
-    title: 'The Only Place Where I Could Still See You',
-    body: "The gym became my daily routine. It wasn't because of fitness, but because it became the only place where I could still see you. Seeing you from a distance became a part of my day, and even without any conversation, those moments truly mattered to me.",
+    side: 'left', icon: 'fa-calendar-alt', date: 'Passing Days',
+    title: 'The Routine of Quiet Care',
+    body: "Even as conversations faded, you remained a constant in my thoughts. Simply seeing you on ordinary days was enough to remind me how much I genuinely cared, even without words between us.",
   },
   {
-    side: 'right', icon: 'fa-eye-slash', date: '27 April 2026',
-    title: 'The Day Silence Became Too Heavy',
-    extra: [
-      "You told me not to look at you like that. I stayed silent. Later, I sat quietly and covered my face with a towel so no one would notice. Inside, the same questions kept repeating:",
-      { italic: '"Has it really become so wrong just to look at you? Did I do something so bad to deserve this distance?"' },
-      "I slowly realized that maybe I care more than you ever did. Maybe I truly became an unwanted person in your world.",
-      { bold: "I love her — and maybe she doesn't love me. It's that simple." },
-    ],
+    side: 'right', icon: 'fa-heart', date: 'The Realization',
+    title: 'Acceptance and Letting Go',
+    body: "Over time, I came to accept that caring for someone doesn't mean life will work out the way you hoped. You have your own feelings, your own life, and your own choices. I love you, Anushka—and learning to step back without resentment was the most honest way I could honor what I felt.",
   },
 ]
 

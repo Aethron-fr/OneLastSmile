@@ -34,8 +34,6 @@ That means something.
 export default function SecretLetter() {
   const [phase, setPhase]     = useState('hidden')   // hidden | unlocking | open | closing
   const [progress, setProgress] = useState(0)
-  const holdTimer   = useRef(null)
-  const progressRef = useRef(null)
   const startTime   = useRef(null)
   const rafId       = useRef(null)
 

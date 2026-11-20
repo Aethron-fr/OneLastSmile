@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './legacy.css'
 import './perf.css'
 import DualCursor from './components/DualCursor'
@@ -9,7 +9,8 @@ import WarningScreen from './components/WarningScreen'
 import LockScreen from './components/LockScreen'
 import FadedScreen from './components/FadedScreen'
 import useMoodMusic from './hooks/useMoodMusic'
-import PreludeScreen, { shouldShowPrelude } from './components/PreludeScreen'
+import PreludeScreen from './components/PreludeScreen'
+import { shouldShowPrelude } from './utils/prelude'
 
 const LOCK_KEY = 'oneLastSmile_faded'
 
@@ -98,7 +99,9 @@ export default function App() {
 
   const handleOpeningComplete = () => {
     // Opening done → mark viewed and enter the main site
-    try { localStorage.setItem('onelastsmile_viewed', 'true') } catch (e) {}
+    try { localStorage.setItem('onelastsmile_viewed', 'true') } catch {
+      // ignore
+    }
     setPhase('main')
   }
 
@@ -116,7 +119,6 @@ export default function App() {
       {phase === 'birthday' && (
         <BirthdayFlow
           onEnter={handleBirthdayEnter}
-          isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
         />
       )}
