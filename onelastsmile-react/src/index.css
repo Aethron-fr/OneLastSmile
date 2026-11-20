@@ -18,7 +18,7 @@ html, body, * {
   width: 26px; height: 26px;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 999999;
+  z-index: 1000002;   /* above mute button (1000001) — clicks still pass through */
   background: transparent;
   border: 2px solid rgba(255, 45, 117, 0.85);
   box-shadow:
@@ -45,7 +45,7 @@ html, body, * {
   width: 7px; height: 7px;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 1000000;
+  z-index: 1000003;   /* topmost — above ring and mute button */
   background: #ff2d75;
   box-shadow: 0 0 6px rgba(255,45,117,0.9), 0 0 12px rgba(255,45,117,0.45);
   will-change: transform;
